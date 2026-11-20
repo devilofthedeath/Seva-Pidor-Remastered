@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/ui/hud_widgets.gd" id="1"]
+[node name="Hud_widgets_202087058339124" type="Control"]
+visible = false
+script = ExtResource("1")
+widget_type = "TIMER"
+timer_id = 1
+default_seconds = 2.0
+timer_param1 = 76
+timer_action = 3
+listener_num = 75
+auto_start = false
+[node name="Lbl" type="Label" parent="."]
+theme_override_colors/font_color = Color(0.451, 0.451, 0.498, 1.000)
+text = "2"

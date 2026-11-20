@@ -1,0 +1,48 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Seva Pidor: Origins"
+run/main_scene="uid://bafmx456swp1s"
+config/features=PackedStringArray("4.7")
+
+[autoload]
+
+GameState="*res://scripts/autoload/GameState.gd"
+AutoSave="*res://scripts/autoload/AutoSave.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://scenes/ui/dima_small_balloon.tscn"
+
+[display]
+
+window/size/viewport_width=480
+window/size/viewport_height=320
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[gui]
+
+theme/custom="res://assets/fonts/modula_theme.tres"
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogue/popup_1.dialogue", "res://dialogue/popup_15.dialogue", "res://dialogue/popup_16.dialogue", "res://dialogue/popup_17.dialogue", "res://dialogue/popup_18.dialogue", "res://dialogue/popup_19.dialogue", "res://dialogue/popup_2.dialogue", "res://dialogue/popup_20.dialogue", "res://dialogue/popup_21.dialogue", "res://dialogue/popup_22.dialogue", "res://dialogue/popup_3.dialogue", "res://dialogue/popup_4.dialogue", "res://dialogue/popup_40.dialogue", "res://dialogue/popup_41.dialogue", "res://dialogue/popup_42.dialogue", "res://dialogue/popup_44.dialogue", "res://dialogue/popup_45.dialogue", "res://dialogue/popup_46.dialogue", "res://dialogue/popup_47.dialogue", "res://dialogue/popup_48.dialogue", "res://dialogue/popup_49.dialogue", "res://dialogue/popup_5.dialogue", "res://dialogue/popup_50.dialogue", "res://dialogue/popup_52.dialogue", "res://dialogue/popup_53.dialogue", "res://dialogue/popup_54.dialogue", "res://dialogue/popup_55.dialogue", "res://dialogue/popup_56.dialogue", "res://dialogue/popup_57.dialogue", "res://dialogue/popup_58.dialogue", "res://dialogue/popup_6.dialogue", "res://dialogue/popup_60.dialogue", "res://dialogue/popup_71.dialogue", "res://dialogue/popup_72.dialogue", "res://dialogue/popup_73.dialogue", "res://dialogue/popup_74.dialogue", "res://dialogue/popup_75.dialogue", "res://dialogue/popup_76.dialogue", "res://dialogue/popup_77.dialogue", "res://dialogue/popup_78.dialogue", "res://dialogue/popup_79.dialogue", "res://dialogue/popup_8.dialogue", "res://dialogue/popup_80.dialogue", "res://dialogue/popup_81.dialogue", "res://dialogue/popup_82.dialogue", "res://dialogue/popup_83.dialogue", "res://dialogue/popup_98.dialogue", "res://dialogue/popup_99.dialogue", "res://dialogue/_TEMPLATE.dialogue")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,5 @@
+[gd_scene format=3]
+[node name="Obj_2020724212975051" type="Label"]
+z_index = 10
+theme_override_colors/font_color = Color(0.451, 0.451, 0.498, 1.000)
+text = "START"

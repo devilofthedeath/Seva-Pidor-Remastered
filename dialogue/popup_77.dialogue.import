@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://bcm04608jsnb2"
+path="res://.godot/imported/popup_77.dialogue-6b7cc625dda51af038e5551bbcc51bbf.tres"
+
+[deps]
+
+source_file="res://dialogue/popup_77.dialogue"
+dest_files=["res://.godot/imported/popup_77.dialogue-6b7cc625dda51af038e5551bbcc51bbf.tres"]
+
+[params]
+
+defaults=true

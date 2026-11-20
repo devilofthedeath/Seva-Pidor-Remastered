@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/202072124185847_2f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020721248474018_1f.png" id="4"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(46, 38)
+[node name="Enemy_202072124903419" type="CharacterBody2D" groups=["enemies"]]
+tex_hit = ExtResource("4")
+frames_hit = 1
+z_index = 2
+script = ExtResource("2")
+collision_layer = 2
+collision_mask = 1
+melee_enabled = true
+mode = "rpg"
+bullet_shape = Vector2(10.0, 8.0)
+gc_id = "202072124903419"
+speed = 60.0
+max_hp = 10
+hp = 10
+infinite_health = false
+contact_damage = 10
+use_gravity = false
+move_dir_mode = 1
+move_shape = 0
+towards_player = 0
+random_direction = 0
+ignore_objects = false
+show_health_bar = false
+health_bar_width = 40
+health_bar_height = 6
+health_bar_color = Color(0.318, 0.396, 0.682, 1.000)
+health_bar_offset = -10.0
+turn_to_player = 0
+boss = false
+can_shoot = false
+shoot_dir = 0
+bullet_speed = 450.0
+bullet_damage = 10
+bullet_max_count = 1
+bullet_lifetime = 2.0
+shoot_interval = 1.2
+death_switch = 11
+start_visible = true
+start_active = true
+listener_num = 0
+vis_on_switch = 1
+act_on_switch = 1
+rem_on_switch = 0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(0.961, 0.969, 0.980, 1.000)
+hframes = 2
+script = ExtResource("3")
+fps = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(38.0, 60.0)
+shape = SubResource("sh")

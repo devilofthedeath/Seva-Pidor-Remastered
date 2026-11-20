@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020726821165398_1f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020726825159690_1f.png" id="4"]
+[ext_resource type="Script" path="res://scripts/entities/destroyable.gd" id="2"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(80, 80)
+[node name="Destroyable_202072682532520" type="StaticBody2D" groups=["blocks", "destroyables"]]
+z_index = 0
+script = ExtResource("2")
+max_hp = 100
+hp = 100
+infinite_health = false
+destroy_score = 1
+destroy_switch = 31
+gc_id = "202072682532520"
+ignore_bullets = false
+destroy_tex = ExtResource("4")
+start_visible = true
+start_active = true
+listener_num = 33
+vis_on_switch = 1
+act_on_switch = 1
+rem_on_switch = 1
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(0.961, 0.969, 0.980, 1.000)
+hframes = 1
+script = ExtResource("3")
+fps = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(40.0, 40.0)
+shape = SubResource("sh")

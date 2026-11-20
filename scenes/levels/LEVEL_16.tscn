@@ -1,0 +1,152 @@
+[gd_scene load_steps=26 format=3]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198121812249235.tscn" id="1_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198121812427564.tscn" id="2_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813014362307.tscn" id="3_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813017593406.tscn" id="4_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019814028434462.tscn" id="5_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="6_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020728220126850.tscn" id="7_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020728220380801.tscn" id="8_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202072913922060.tscn" id="9_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202087047407613.tscn" id="10_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202087049281820.tscn" id="11_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202087049453754.tscn" id="12_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208704993597.tscn" id="13_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208705021341.tscn" id="14_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202087052142509.tscn" id="15_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202087055448554.tscn" id="16_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202087058339124.tscn" id="17_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208705888284.tscn" id="18_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208710238707.tscn" id="19_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208715210114.tscn" id="20_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208717242507.tscn" id="21_o"]
+[ext_resource type="Script" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
+[ext_resource type="Script" path="res://scripts/entities/level_bounds.gd" id="bounds"]
+[sub_resource type="Gradient" id="gb"]
+colors = PackedColorArray(0.192, 0.133, 0.165, 1.000, 0.580, 0.212, 0.227, 1.000)
+[sub_resource type="GradientTexture2D" id="gtb"]
+gradient = SubResource("gb")
+fill_to = Vector2(1, 0)
+width = 480
+height = 320
+[node name="LEVEL_16" type="Node2D"]
+[node name="Sky" type="CanvasLayer" parent="."]
+layer = -2
+[node name="Parallax" type="Node2D" parent="Sky"]
+script = ExtResource("bgscroll")
+scroll_factor = 1.0
+[node name="Bg" type="TextureRect" parent="Sky/Parallax"]
+size = Vector2(480, 320)
+texture = SubResource("gtb")
+stretch_mode = 1
+[node name="LevelBounds" type="Node" parent="."]
+script = ExtResource("bounds")
+level_width = 480
+level_height = 320
+[node name="W_0" parent="." instance=ExtResource("9_o")]
+position = Vector2(250.0, 55.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_1" parent="." instance=ExtResource("9_o")]
+position = Vector2(75.0, 140.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_2" parent="." instance=ExtResource("1_o")]
+position = Vector2(125.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_3" parent="." instance=ExtResource("2_o")]
+position = Vector2(0.0, 240.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_4" parent="." instance=ExtResource("2_o")]
+position = Vector2(80.0, 240.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_5" parent="." instance=ExtResource("2_o")]
+position = Vector2(160.0, 240.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_6" parent="." instance=ExtResource("2_o")]
+position = Vector2(240.0, 240.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_7" parent="." instance=ExtResource("2_o")]
+position = Vector2(320.0, 240.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_8" parent="." instance=ExtResource("2_o")]
+position = Vector2(400.0, 240.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_9" parent="." instance=ExtResource("3_o")]
+position = Vector2(375.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_10" parent="." instance=ExtResource("4_o")]
+position = Vector2(395.0, 250.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_11" parent="." instance=ExtResource("15_o")]
+position = Vector2(375.0, 185.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_12" parent="." instance=ExtResource("14_o")]
+position = Vector2(15.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_13" parent="." instance=ExtResource("10_o")]
+position = Vector2(45.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_14" parent="." instance=ExtResource("13_o")]
+position = Vector2(-20.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_15" parent="." instance=ExtResource("11_o")]
+position = Vector2(65.0, 160.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_16" parent="." instance=ExtResource("12_o")]
+position = Vector2(15.0, 195.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_17" parent="." instance=ExtResource("16_o")]
+position = Vector2(180.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_18" parent="." instance=ExtResource("18_o")]
+position = Vector2(25.0, 30.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_19" parent="." instance=ExtResource("20_o")]
+position = Vector2(170.0, 175.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_20" parent="." instance=ExtResource("21_o")]
+position = Vector2(145.0, 200.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_21" parent="." instance=ExtResource("4_o")]
+position = Vector2(375.0, 250.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_22" parent="." instance=ExtResource("8_o")]
+position = Vector2(-40.0, 120.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_23" parent="." instance=ExtResource("8_o")]
+position = Vector2(-40.0, 40.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_24" parent="." instance=ExtResource("7_o")]
+position = Vector2(80.0, 160.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_25" parent="." instance=ExtResource("8_o")]
+position = Vector2(40.0, 40.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_26" parent="." instance=ExtResource("8_o")]
+position = Vector2(120.0, 120.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_27" parent="." instance=ExtResource("8_o")]
+position = Vector2(200.0, 40.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_28" parent="." instance=ExtResource("7_o")]
+position = Vector2(240.0, 160.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_29" parent="." instance=ExtResource("5_o")]
+position = Vector2(160.0, 80.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_30" parent="." instance=ExtResource("5_o")]
+position = Vector2(320.0, 160.0)
+scale = Vector2(1.0, 1.0)
+[node name="W_31" parent="." instance=ExtResource("5_o")]
+position = Vector2(400.0, 160.0)
+scale = Vector2(1.0, 1.0)
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 10
+[node name="Hud_0" parent="HUD" instance=ExtResource("6_o")]
+position = Vector2(60.0, 25.0)
+scale = Vector2(1.0, 1.0)
+[node name="Hud_1" parent="HUD" instance=ExtResource("17_o")]
+position = Vector2(120.0, 85.0)
+scale = Vector2(1.0, 1.0)
+[node name="Hud_2" parent="HUD" instance=ExtResource("19_o")]
+position = Vector2(175.0, 80.0)
+scale = Vector2(1.0, 1.0)

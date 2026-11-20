@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://cktfrmagrvfan"
+path="res://.godot/imported/popup_48.dialogue-423a8146af3d10eb5d5feed1121ea45b.tres"
+
+[deps]
+
+source_file="res://dialogue/popup_48.dialogue"
+dest_files=["res://.godot/imported/popup_48.dialogue-423a8146af3d10eb5d5feed1121ea45b.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/2019813010472321_1f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/roles/moving_block.gd" id="2"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(44, 4)
+[node name="MovingBlock_2019813014362307" type="AnimatableBody2D" groups=["blocks", "moving_blocks"]]
+z_index = 0
+script = ExtResource("2")
+enable_move = true
+move_speed = 420.0
+move_direction = 1
+start_visible = true
+start_active = true
+listener_num = 16
+vis_on_switch = 1
+act_on_switch = 1
+rem_on_switch = 1
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(0.961, 0.969, 0.980, 1.000)
+hframes = 1
+script = ExtResource("3")
+fps = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(39.0, 77.5)
+shape = SubResource("sh")

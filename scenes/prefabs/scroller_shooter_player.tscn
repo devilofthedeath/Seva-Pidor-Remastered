@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/202087127107120_2f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/player/player_master.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/20207182221210453_1f.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020871435510569_7f.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020871435510569_7f.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020871414193739_1f.png" id="7"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(37, 50)
+[node name="scroller_shooter_player" type="CharacterBody2D" groups=["player"]]
+tex_hit = ExtResource("7")
+frames_hit = 1
+tex_dead = ExtResource("6")
+frames_dead = 7
+tex_dead = ExtResource("5")
+frames_dead = 7
+z_index = 5
+script = ExtResource("2")
+collision_layer = 2
+collision_mask = 5
+mode = "shooter"
+speed = 240.0
+jump_force = -516.0
+has_gun = true
+shoot_dir = 2
+bullet_speed = 810.0
+bullet_damage = 10
+bullet_max_count = 3
+bullet_lifetime = 1.0
+bullet_offset = Vector2(0.0, 0.0)
+bullet_shape = Vector2(80, 11)
+body_center = Vector2(39.5, 41.0)
+bullet_owner_id = "202087138287379"
+bullet_in_air = false
+melee_damage = 10
+max_hp = 100
+jump_freeze = false
+tex_idle = ExtResource("1")
+frames_idle = 2
+tex_bullet = ExtResource("4")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(1.000, 1.000, 1.000, 1.000)
+hframes = 2
+script = ExtResource("3")
+fps = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(39.5, 41.0)
+shape = SubResource("sh")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(39.5, 41.0)

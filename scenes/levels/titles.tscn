@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bsqydroepfmxn"]
+
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019812162202853.tscn" id="1_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198121812249235.tscn" id="2_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813017593406.tscn" id="3_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019814038197135.tscn" id="4_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="5_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020819313528070.tscn" id="6_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081931482075.tscn" id="7_o"]
+[ext_resource type="AudioStream" uid="uid://c4br8nf2jwit4" path="res://assets/audio/snd_2020891447411697.wav" id="8_bgm"]
+[ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
+[ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
+
+[sub_resource type="Gradient" id="gb"]
+colors = PackedColorArray(0.251, 0.592, 0.918, 1, 0.4, 0.212, 0.349, 1)
+
+[sub_resource type="GradientTexture2D" id="gtb"]
+gradient = SubResource("gb")
+width = 480
+height = 320
+fill_to = Vector2(0, 1)
+
+[node name="main_menu" type="Node2D" unique_id=1545119176]
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=1403124332]
+layer = -2
+
+[node name="Parallax" type="Node2D" parent="Sky" unique_id=1763236949]
+script = ExtResource("bgscroll")
+
+[node name="Bg" type="TextureRect" parent="Sky/Parallax" unique_id=1145182297]
+offset_right = 480.0
+offset_bottom = 320.0
+texture = SubResource("gtb")
+stretch_mode = 1
+
+[node name="LevelBounds" type="Node" parent="." unique_id=920408998]
+script = ExtResource("bounds")
+
+[node name="W_0" parent="." unique_id=1989597205 instance=ExtResource("1_o")]
+offset_left = 245.0
+offset_top = 125.0
+offset_right = 245.0
+offset_bottom = 125.0
+scale = Vector2(0.8, 0.9)
+
+[node name="W_1" parent="." unique_id=912399416 instance=ExtResource("2_o")]
+position = Vector2(205, 180)
+tex_hit = null
+tex_dead = null
+frames_dead = 1
+
+[node name="W_2" parent="." unique_id=1364266240 instance=ExtResource("3_o")]
+position = Vector2(197, 238.144)
+scale = Vector2(0.9, 2.0928)
+
+[node name="W_3" parent="." unique_id=762496394 instance=ExtResource("4_o")]
+position = Vector2(165, 180)
+
+[node name="W_4" parent="." unique_id=193464047 instance=ExtResource("6_o")]
+position = Vector2(260, 195)
+
+[node name="W_5" parent="." unique_id=1137979047 instance=ExtResource("7_o")]
+position = Vector2(135, 180)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1768282609]
+layer = 10
+
+[node name="Hud_0" parent="HUD" unique_id=673310586 instance=ExtResource("5_o")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 25.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1208082501]
+process_mode = 4
+stream = ExtResource("8_bgm")
+autoplay = true

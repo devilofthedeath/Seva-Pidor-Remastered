@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/20207232353298697_1f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/player/player_master.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020724042478714_8f.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/20207241118539555_1f.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020122110407274_2f.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/20207241318115431_2f.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/20207182221210453_1f.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020122110407274_2f.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/20198122355260137_4f.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/202072408197706_1f.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/2020728049490605_10f.png" id="12"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(37, 63)
+[node name="gun_player" type="CharacterBody2D" groups=["player"]]
+tex_hit = ExtResource("11")
+frames_hit = 1
+tex_dead = ExtResource("12")
+frames_dead = 10
+z_index = 5
+script = ExtResource("2")
+collision_layer = 2
+collision_mask = 5
+mode = "platformer"
+speed = 300.0
+jump_force = -473.0
+has_gun = true
+shoot_dir = 0
+bullet_speed = 360.0
+bullet_damage = 40
+bullet_max_count = 3
+bullet_lifetime = 1.0
+bullet_offset = Vector2(0.0, 0.0)
+bullet_shape = Vector2(80, 11)
+body_center = Vector2(39.5, 47.5)
+bullet_owner_id = "2020724015153425"
+bullet_in_air = true
+melee_damage = 100
+max_hp = 100
+jump_freeze = true
+tex_idle = ExtResource("1")
+frames_idle = 1
+tex_move = ExtResource("4")
+frames_move = 8
+tex_jump = ExtResource("5")
+frames_jump = 1
+tex_shoot = ExtResource("6")
+frames_shoot = 2
+tex_melee = ExtResource("7")
+frames_melee = 2
+tex_bullet = ExtResource("8")
+tex_shoot_air = ExtResource("9")
+frames_shoot_air = 2
+tex_melee_air = ExtResource("10")
+frames_melee_air = 4
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(1.000, 1.000, 1.000, 0.990)
+hframes = 1
+script = ExtResource("3")
+fps = 12
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(39.5, 47.5)
+shape = SubResource("sh")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(39.5, 47.5)

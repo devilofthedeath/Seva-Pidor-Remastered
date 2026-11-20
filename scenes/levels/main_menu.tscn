@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bafmx456swp1s"]
+
+[ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="1_cn35j"]
+[ext_resource type="Script" uid="uid://22io182ax8as" path="res://scenes/levels/main_menu.gd" id="1_wko7x"]
+[ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="2_wko7x"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019812162204514.tscn" id="3_pwqr4"]
+[ext_resource type="Texture2D" uid="uid://bpyowk3mxyqsc" path="res://assets/sprites/2019812164249051_1f.png" id="4_ohdsy"]
+[ext_resource type="Script" uid="uid://bvgfat6ixlear" path="res://scripts/entities/anim_sprite.gd" id="5_fwnpy"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019814038197135.tscn" id="6_k0nyb"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813017593406.tscn" id="7_wgqco"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="8_7gp8n"]
+[ext_resource type="AudioStream" uid="uid://moacqqnojio" path="res://assets/audio/snd_20207292326522797.wav" id="9_gdcvq"]
+
+[sub_resource type="Gradient" id="gb"]
+colors = PackedColorArray(0.4, 0.212, 0.349, 1, 0, 0.318, 0.384, 1)
+
+[sub_resource type="GradientTexture2D" id="gtb"]
+gradient = SubResource("gb")
+width = 480
+height = 320
+fill_to = Vector2(0, 1)
+
+[node name="2019812162208085" type="Node2D" unique_id=890066380]
+script = ExtResource("1_wko7x")
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=1684419721]
+layer = -2
+
+[node name="Parallax" type="Node2D" parent="Sky" unique_id=261978540]
+script = ExtResource("1_cn35j")
+
+[node name="Bg" type="TextureRect" parent="Sky/Parallax" unique_id=407893813]
+offset_right = 480.0
+offset_bottom = 320.0
+texture = SubResource("gtb")
+stretch_mode = 1
+
+[node name="LevelBounds" type="Node" parent="." unique_id=7345885]
+script = ExtResource("2_wko7x")
+
+[node name="W_0" parent="." unique_id=643168540 instance=ExtResource("3_pwqr4")]
+offset_left = 208.0
+offset_top = 160.0
+offset_right = 286.0
+offset_bottom = 179.0
+
+[node name="W_1" type="Node2D" parent="." unique_id=918078704 groups=["player"]]
+z_index = 16
+position = Vector2(-148, -7)
+scale = Vector2(4.7, 5.55)
+
+[node name="Sprite2D" type="Sprite2D" parent="W_1" unique_id=432200294]
+modulate = Color(1, 1, 1, 0.99)
+texture = ExtResource("4_ohdsy")
+centered = false
+script = ExtResource("5_fwnpy")
+fps = 12
+
+[node name="Camera2D" type="Camera2D" parent="W_1" unique_id=750487140]
+position = Vector2(39.5, 47.5)
+
+[node name="W_2" parent="." unique_id=1061374136 instance=ExtResource("6_k0nyb")]
+position = Vector2(274, 59)
+scale = Vector2(4.15, 4.65)
+
+[node name="W_3" parent="." unique_id=2107263278 instance=ExtResource("7_wgqco")]
+position = Vector2(15, 160)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=2076054297]
+layer = 10
+
+[node name="Hud_0" parent="HUD" unique_id=1104450321 instance=ExtResource("8_7gp8n")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 25.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1540510347]
+process_mode = 4
+stream = ExtResource("9_gdcvq")
+autoplay = true
+
+[node name="Button" type="Button" parent="." unique_id=528831322]
+offset_left = 224.0
+offset_top = 224.0
+offset_right = 276.0
+offset_bottom = 251.0
+text = "START"
+
+[node name="ContinueButton" type="Button" parent="." unique_id=528831323]
+offset_left = 224.0
+offset_top = 258.0
+offset_right = 340.0
+offset_bottom = 285.0
+text = "Продолжить"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_pressed"]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

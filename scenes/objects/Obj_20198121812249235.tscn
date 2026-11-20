@@ -1,0 +1,3 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/player.tscn" id="1"]
+[node name="Obj_20198121812249235" instance=ExtResource("1")]

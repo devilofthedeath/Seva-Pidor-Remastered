@@ -1,0 +1,5 @@
+[gd_scene format=3]
+[node name="Obj_2019812162204514" type="Label"]
+z_index = 10
+theme_override_colors/font_color = Color(0.973, 0.365, 0.502, 1.000)
+text = "SEVA PIDOR"

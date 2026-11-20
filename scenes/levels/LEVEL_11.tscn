@@ -1,0 +1,439 @@
+[gd_scene format=3 uid="uid://dnvwm2qxv75he"]
+
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="1_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207211521518024.tscn" id="2_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207212148467449.tscn" id="3_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207301710154624.tscn" id="4_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207301719451402.tscn" id="5_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020730179221153.tscn" id="6_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207302236413096.tscn" id="7_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207302244362587.tscn" id="8_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207302244500604.tscn" id="9_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207302245506833.tscn" id="10_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020811450437411.tscn" id="11_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020811456562363.tscn" id="12_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020811611538561.tscn" id="13_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081640191729.tscn" id="16_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081739111238.tscn" id="17_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081832174049.tscn" id="18_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081848262928.tscn" id="19_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081852583738.tscn" id="20_o"]
+[ext_resource type="Script" uid="uid://c84u67npmfj2b" path="res://scripts/entities/destroyable.gd" id="20_swvld"]
+[ext_resource type="Texture2D" uid="uid://s8rfa1plqdac" path="res://assets/sprites/202081650433802_1f.png" id="21_m8pck"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081853531026.tscn" id="21_o"]
+[ext_resource type="Script" uid="uid://bvgfat6ixlear" path="res://scripts/entities/anim_sprite.gd" id="22_jsnpx"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081855370782.tscn" id="22_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208190559665.tscn" id="23_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020831258473677.tscn" id="24_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202083131366136.tscn" id="25_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020831314579206.tscn" id="26_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020831315173020.tscn" id="27_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020831322569525.tscn" id="28_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020831446124376.tscn" id="29_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202084055292948.tscn" id="30_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202084055594166.tscn" id="31_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020841254343748.tscn" id="32_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020841921419672.tscn" id="33_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202084192230808.tscn" id="34_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020841926239178.tscn" id="35_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208422255990.tscn" id="36_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202084226135112.tscn" id="37_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20208423360805.tscn" id="38_o"]
+[ext_resource type="Texture2D" uid="uid://2q3dcwdxqajt" path="res://assets/sprites/2019814118308176_1f.png" id="42_pat"]
+[ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
+
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(80, 80)
+
+[node name="LEVEL_11" type="Node2D" unique_id=693431712]
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=94157706]
+layer = -2
+
+[node name="LevelBounds" type="Node" parent="." unique_id=761393998]
+script = ExtResource("bounds")
+level_width = 960
+level_height = 640
+
+[node name="W_0" parent="." unique_id=2096420990 instance=ExtResource("6_o")]
+position = Vector2(-31, 529.008)
+scale = Vector2(1.4, 1.8998)
+start_active = false
+
+[node name="W_1" parent="." unique_id=1750485785 instance=ExtResource("6_o")]
+position = Vector2(80, 560)
+start_active = false
+
+[node name="W_2" parent="." unique_id=1664290627 instance=ExtResource("6_o")]
+position = Vector2(160, 560)
+start_active = false
+
+[node name="W_3" parent="." unique_id=1571196586 instance=ExtResource("6_o")]
+position = Vector2(240, 560)
+start_active = false
+
+[node name="W_4" parent="." unique_id=1713378267 instance=ExtResource("6_o")]
+position = Vector2(320, 560)
+start_active = false
+
+[node name="W_5" parent="." unique_id=562499307 instance=ExtResource("6_o")]
+position = Vector2(400, 560)
+start_active = false
+
+[node name="W_6" parent="." unique_id=1715180278 instance=ExtResource("6_o")]
+position = Vector2(480, 560)
+start_active = false
+
+[node name="W_7" parent="." unique_id=1047866100 instance=ExtResource("6_o")]
+position = Vector2(560, 560)
+start_active = false
+
+[node name="W_8" parent="." unique_id=656973983 instance=ExtResource("6_o")]
+position = Vector2(640, 560)
+start_active = false
+
+[node name="W_10" parent="." unique_id=441339933 instance=ExtResource("6_o")]
+position = Vector2(800, 560)
+start_active = false
+
+[node name="W_11" parent="." unique_id=1295617031 instance=ExtResource("6_o")]
+position = Vector2(880, 560)
+start_active = false
+
+[node name="W_12" parent="." unique_id=1609020977 instance=ExtResource("4_o")]
+position = Vector2(-283.16, 471.436)
+scale = Vector2(15.954, -4.7859)
+
+[node name="W_13" parent="." unique_id=2133231430 instance=ExtResource("4_o")]
+position = Vector2(85.968, 458.74)
+scale = Vector2(13.1008, 1.7815)
+
+[node name="W_14" parent="." unique_id=2047537295 instance=ExtResource("4_o")]
+position = Vector2(-44.992, 342.192)
+scale = Vector2(1.9998, 2.1952)
+
+[node name="W_15" parent="." unique_id=864210275 instance=ExtResource("2_o")]
+position = Vector2(140, 80)
+
+[node name="W_16" parent="." unique_id=2097190988 instance=ExtResource("3_o")]
+position = Vector2(179.064, 150.752)
+scale = Vector2(0.8984, 0.8562)
+
+[node name="W_17" parent="." unique_id=256010861 instance=ExtResource("7_o")]
+position = Vector2(150, 165)
+
+[node name="W_18" parent="." unique_id=526581198 instance=ExtResource("8_o")]
+position = Vector2(140, 80)
+
+[node name="W_9" parent="." unique_id=959606763 instance=ExtResource("6_o")]
+position = Vector2(720, 560)
+
+[node name="W_19" parent="." unique_id=1998248432 instance=ExtResource("16_o")]
+position = Vector2(730, 110)
+
+[node name="W_20" parent="." unique_id=1933367532 instance=ExtResource("18_o")]
+position = Vector2(575, 270)
+
+[node name="W_21" parent="." unique_id=729737970 instance=ExtResource("19_o")]
+position = Vector2(557, 407)
+scale = Vector2(0.7, 0.7)
+
+[node name="W_22" parent="." unique_id=1416991788 instance=ExtResource("20_o")]
+position = Vector2(560, 270)
+tex_hit = null
+
+[node name="W_23" parent="." unique_id=1027474813 instance=ExtResource("21_o")]
+position = Vector2(582, 407)
+scale = Vector2(0.7, 0.7)
+tex_hit = null
+frames_hit = 1
+
+[node name="W_24" parent="." unique_id=219296790 instance=ExtResource("22_o")]
+position = Vector2(45, 65)
+
+[node name="W_25" parent="." unique_id=1813488962 instance=ExtResource("11_o")]
+position = Vector2(620, 470)
+
+[node name="W_26" parent="." unique_id=1127322031 instance=ExtResource("12_o")]
+position = Vector2(605, 470)
+
+[node name="W_27" parent="." unique_id=660798314 instance=ExtResource("9_o")]
+position = Vector2(0, 90)
+
+[node name="W_28" parent="." unique_id=1459550701 instance=ExtResource("13_o")]
+position = Vector2(-15, 50)
+
+[node name="W_30" type="StaticBody2D" parent="." unique_id=234813247 groups=["blocks", "destroyables"]]
+z_index = 5
+position = Vector2(458, 418)
+scale = Vector2(1.8, 1.8)
+script = ExtResource("20_swvld")
+destroy_switch = 60
+gc_id = "202081169430339"
+vis_on_switch = 1
+act_on_switch = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="W_30" unique_id=453268600]
+modulate = Color(0.961, 0.969, 0.98, 1)
+texture = ExtResource("21_m8pck")
+centered = false
+script = ExtResource("22_jsnpx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="W_30" unique_id=752038522]
+position = Vector2(39.444443, 53.88889)
+scale = Vector2(-0.87728953, 0.4314175)
+shape = SubResource("sh")
+
+[node name="W_31" parent="." unique_id=1510863277 instance=ExtResource("24_o")]
+position = Vector2(765, 90)
+
+[node name="W_32" parent="." unique_id=1994134069 instance=ExtResource("28_o")]
+position = Vector2(935, 115)
+
+[node name="W_33" parent="." unique_id=52632468 instance=ExtResource("26_o")]
+position = Vector2(935, 115)
+
+[node name="W_34" parent="." unique_id=145089833 instance=ExtResource("25_o")]
+position = Vector2(730, 150)
+
+[node name="W_35" parent="." unique_id=1333735782 instance=ExtResource("27_o")]
+position = Vector2(760, 90)
+
+[node name="W_36" parent="." unique_id=234239583 instance=ExtResource("29_o")]
+position = Vector2(520, 365)
+
+[node name="W_37" parent="." unique_id=1862999184 instance=ExtResource("31_o")]
+position = Vector2(395, 395)
+tex_hit = null
+frames_hit = 1
+
+[node name="W_38" parent="." unique_id=768398772 instance=ExtResource("30_o")]
+position = Vector2(425, 395)
+
+[node name="W_39" parent="." unique_id=1409689417 instance=ExtResource("38_o")]
+position = Vector2(6, 223)
+scale = Vector2(1.6, 1.8)
+
+[node name="W_40" parent="." unique_id=421806138 instance=ExtResource("38_o")]
+position = Vector2(121, 218)
+scale = Vector2(1.6, 1.8)
+
+[node name="W_41" parent="." unique_id=275832188 instance=ExtResource("38_o")]
+position = Vector2(251, 228)
+scale = Vector2(1.6, 1.8)
+
+[node name="W_43" parent="." unique_id=548411897 instance=ExtResource("38_o")]
+position = Vector2(386, 103)
+scale = Vector2(1.6, 1.8)
+
+[node name="W_44" parent="." unique_id=1730031214 instance=ExtResource("38_o")]
+position = Vector2(491.008, 108)
+scale = Vector2(1.5998, 1.8)
+
+[node name="W_45" parent="." unique_id=65230311 instance=ExtResource("38_o")]
+position = Vector2(766.004, 443.014)
+scale = Vector2(1.5999, 1.7999)
+
+[node name="W_46" parent="." unique_id=214691802 instance=ExtResource("38_o")]
+position = Vector2(764.996, 356)
+scale = Vector2(1.5001, 1.6)
+
+[node name="W_47" parent="." unique_id=649451673 instance=ExtResource("38_o")]
+position = Vector2(3, 443.032)
+scale = Vector2(1.55, 1.7992)
+
+[node name="W_48" parent="." unique_id=1420567067 instance=ExtResource("38_o")]
+position = Vector2(4, 359.008)
+scale = Vector2(1.4, 1.8998)
+
+[node name="W_49" parent="." unique_id=1034596175 instance=ExtResource("38_o")]
+position = Vector2(107, 439.128)
+scale = Vector2(1.7, 1.8968)
+
+[node name="W_50" parent="." unique_id=152888591 instance=ExtResource("38_o")]
+position = Vector2(107, 359.128)
+scale = Vector2(1.7, 1.8968)
+
+[node name="W_51" parent="." unique_id=663799155 instance=ExtResource("38_o")]
+position = Vector2(855, 434.124)
+scale = Vector2(1.5, 1.8969)
+
+[node name="W_52" parent="." unique_id=541193456 instance=ExtResource("38_o")]
+position = Vector2(860, 344.124)
+scale = Vector2(1.5, 1.8969)
+
+[node name="W_53" parent="." unique_id=1634049814 instance=ExtResource("38_o")]
+position = Vector2(855, 239.124)
+scale = Vector2(1.5, 1.8969)
+
+[node name="W_54" parent="." unique_id=1219723626 instance=ExtResource("38_o")]
+position = Vector2(765, 239.124)
+scale = Vector2(1.5, 1.8969)
+
+[node name="W_55" parent="." unique_id=150756015 instance=ExtResource("36_o")]
+position = Vector2(755, 530)
+
+[node name="W_56" parent="." unique_id=29125868 instance=ExtResource("2_o")]
+position = Vector2(745, 520)
+
+[node name="W_57" parent="." unique_id=1903805739 instance=ExtResource("37_o")]
+position = Vector2(750, 85)
+
+[node name="W_58" parent="." unique_id=1007996578 instance=ExtResource("32_o")]
+position = Vector2(0, 125)
+
+[node name="W_59" parent="." unique_id=949623027 instance=ExtResource("32_o")]
+position = Vector2(80, 125)
+
+[node name="W_60" parent="." unique_id=917481800 instance=ExtResource("32_o")]
+position = Vector2(160, 125)
+
+[node name="W_61" parent="." unique_id=2007313695 instance=ExtResource("32_o")]
+position = Vector2(240, 125)
+
+[node name="W_62" parent="." unique_id=2051514637 instance=ExtResource("32_o")]
+position = Vector2(320, 125)
+
+[node name="W_63" parent="." unique_id=1048317412 instance=ExtResource("32_o")]
+position = Vector2(400, 125)
+
+[node name="W_64" parent="." unique_id=1665157000 instance=ExtResource("32_o")]
+position = Vector2(480, 125)
+
+[node name="W_65" parent="." unique_id=593537646 instance=ExtResource("32_o")]
+position = Vector2(560, 125)
+
+[node name="W_66" parent="." unique_id=478898170 instance=ExtResource("32_o")]
+position = Vector2(640, 125)
+
+[node name="W_67" parent="." unique_id=1134704637 instance=ExtResource("32_o")]
+position = Vector2(720, 125)
+
+[node name="W_68" parent="." unique_id=665955957 instance=ExtResource("32_o")]
+position = Vector2(800, 125)
+
+[node name="W_69" parent="." unique_id=997737367 instance=ExtResource("32_o")]
+position = Vector2(880, 125)
+
+[node name="W_70" parent="." unique_id=1338020525 instance=ExtResource("32_o")]
+position = Vector2(645, 205)
+
+[node name="W_71" parent="." unique_id=384257936 instance=ExtResource("32_o")]
+position = Vector2(645, 285)
+
+[node name="W_72" parent="." unique_id=2035772106 instance=ExtResource("32_o")]
+position = Vector2(645, 365)
+
+[node name="W_73" parent="." unique_id=1635093807 instance=ExtResource("32_o")]
+position = Vector2(645, 445)
+
+[node name="W_74" parent="." unique_id=884068649 instance=ExtResource("32_o")]
+position = Vector2(645, 515)
+
+[node name="W_75" parent="." unique_id=1162828107 instance=ExtResource("32_o")]
+position = Vector2(565, 380)
+
+[node name="W_76" parent="." unique_id=128883466 instance=ExtResource("32_o")]
+position = Vector2(485, 380)
+
+[node name="W_77" parent="." unique_id=1969670307 instance=ExtResource("32_o")]
+position = Vector2(405, 380)
+
+[node name="W_78" parent="." unique_id=486353386 instance=ExtResource("32_o")]
+position = Vector2(325, 380)
+
+[node name="W_79" parent="." unique_id=2123719633 instance=ExtResource("32_o")]
+position = Vector2(245, 380)
+
+[node name="W_80" parent="." unique_id=1710718076 instance=ExtResource("32_o")]
+position = Vector2(165, 380)
+
+[node name="W_81" parent="." unique_id=337527008 instance=ExtResource("32_o")]
+position = Vector2(85, 380)
+
+[node name="W_82" parent="." unique_id=2006557336 instance=ExtResource("32_o")]
+position = Vector2(0, 380.5)
+
+[node name="W_83" parent="." unique_id=1343656375 instance=ExtResource("32_o")]
+position = Vector2(20, 380)
+
+[node name="W_84" parent="." unique_id=1460597904 instance=ExtResource("32_o")]
+position = Vector2(725, 380)
+
+[node name="W_85" parent="." unique_id=40323241 instance=ExtResource("32_o")]
+position = Vector2(645, 90)
+
+[node name="W_86" parent="." unique_id=433041846 instance=ExtResource("34_o")]
+position = Vector2(210, 55)
+
+[node name="W_87" parent="." unique_id=30002025 instance=ExtResource("33_o")]
+position = Vector2(260, 55)
+
+[node name="W_88" parent="." unique_id=699652907 instance=ExtResource("35_o")]
+position = Vector2(310, 90)
+
+[node name="FixedLayer" type="CanvasLayer" parent="." unique_id=777948813]
+layer = -1
+
+[node name="F_0" parent="FixedLayer" unique_id=623452932 instance=ExtResource("5_o")]
+position = Vector2(-3.0000114, 22)
+scale = Vector2(23.9953, 0.6929)
+
+[node name="F_2" parent="FixedLayer" unique_id=1003851339 instance=ExtResource("5_o")]
+position = Vector2(4.7683716e-07, 653)
+scale = Vector2(23.9953, 0.6929)
+
+[node name="F_3" parent="FixedLayer" unique_id=1367341734 instance=ExtResource("5_o")]
+position = Vector2(-15.999999, 30)
+rotation = 1.5707964
+scale = Vector2(21.9153, 0.6929)
+
+[node name="F_4" parent="FixedLayer" unique_id=911535646 instance=ExtResource("5_o")]
+position = Vector2(990.99994, 30)
+rotation = 1.5707964
+scale = Vector2(21.9153, 0.6929)
+
+[node name="F_1" parent="FixedLayer" unique_id=1856151939 instance=ExtResource("10_o")]
+z_index = 4096
+position = Vector2(391.767, 46.164)
+scale = Vector2(1.7004, 1.4588)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=797207290]
+layer = 10
+
+[node name="Hud_0" parent="HUD" unique_id=1552663251 instance=ExtResource("1_o")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 25.0
+
+[node name="Hud_1" parent="HUD" unique_id=1392162774 instance=ExtResource("17_o")]
+z_index = 14
+layout_mode = 3
+anchors_preset = 0
+offset_left = 460.0
+offset_top = 80.0
+offset_right = 460.0
+offset_bottom = 80.0
+
+[node name="Hud_2" parent="HUD" unique_id=206766369 instance=ExtResource("23_o")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 90.0
+offset_top = 135.0
+offset_right = 90.0
+offset_bottom = 135.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=713533886]
+process_mode = 4
+autoplay = true
+
+[node name="Bg" type="TextureRect" parent="." unique_id=1857958338]
+modulate = Color(0.961, 0.969, 0.98, 1)
+z_index = -1000
+offset_right = 960.0
+offset_bottom = 640.0
+texture = ExtResource("42_pat")
+stretch_mode = 1

@@ -1,0 +1,5 @@
+[gd_scene format=3]
+[node name="Obj_202081425493498" type="Label"]
+z_index = 10
+theme_override_colors/font_color = Color(0.192, 0.133, 0.165, 1.000)
+text = "Главное меню"

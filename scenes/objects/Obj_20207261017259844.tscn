@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/20207261016440045_1f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/entities/solid_block.gd" id="2"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(9, 4)
+[node name="Block_20207261017259844" type="StaticBody2D" groups=["blocks"]]
+z_index = 0
+script = ExtResource("2")
+start_visible = false
+start_active = true
+listener_num = 32
+vis_on_switch = 1
+act_on_switch = 1
+rem_on_switch = 1
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(0.961, 0.969, 0.980, 1.000)
+hframes = 1
+script = ExtResource("3")
+fps = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 9.5)
+shape = SubResource("sh")

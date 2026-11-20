@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Texture2D" path="res://assets/sprites/2019813021392223_1f.png" id="1"]
+[ext_resource type="Script" path="res://scripts/entities/anim_sprite.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/roles/collectable.gd" id="2"]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(29, 35)
+[node name="Collectable_201982404287181" type="Area2D"]
+z_index = 0
+script = ExtResource("2")
+role = "COLLECTABLE"
+start_visible = true
+start_active = true
+listener_num = 0
+vis_on_switch = 1
+act_on_switch = 1
+rem_on_switch = 0
+switch_num = 0
+switch_mode = 2
+by_bullet = false
+by_melee = false
+ignore_player = false
+once = false
+action_score = 0
+popup_index = 7
+grant_gun = false
+action_health = 0
+damage = 25
+timer_id = 1
+timer_secs = 0.0
+need_score = 0
+need_cleared = ""
+gc_id = "201982404287181"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+modulate = Color(0.961, 0.969, 0.980, 1.000)
+hframes = 1
+script = ExtResource("3")
+fps = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(22.5, 19.5)
+shape = SubResource("sh")

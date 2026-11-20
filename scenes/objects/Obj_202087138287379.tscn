@@ -1,0 +1,3 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/scroller_shooter_player.tscn" id="1"]
+[node name="Obj_202087138287379" instance=ExtResource("1")]

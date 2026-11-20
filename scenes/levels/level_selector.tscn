@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cppfe6habxxmb"]
+
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="1_o"]
+[ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
+[ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
+
+[node name="LEVEL_SELECTOR" type="Node2D" unique_id=233036119]
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=219385942]
+layer = -2
+
+[node name="Parallax" type="Node2D" parent="Sky" unique_id=2107167808]
+script = ExtResource("bgscroll")
+
+[node name="Bg" type="ColorRect" parent="Sky/Parallax" unique_id=600564311]
+offset_right = 480.0
+offset_bottom = 320.0
+color = Color(0.192, 0.133, 0.165, 1)
+
+[node name="LevelBounds" type="Node" parent="." unique_id=1883165179]
+script = ExtResource("bounds")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=554274188]
+layer = 10
+
+[node name="Hud_0" parent="HUD" unique_id=564887970 instance=ExtResource("1_o")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 25.0

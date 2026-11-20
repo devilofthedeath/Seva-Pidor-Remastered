@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cadppueoidtu7"]
+
+[ext_resource type="Texture2D" uid="uid://cpevldvftevbh" path="res://assets/sprites/2019821114518739_1f.png" id="1"]
+[ext_resource type="Script" uid="uid://cx0wx5bixjx0g" path="res://scripts/enemies/enemy.gd" id="2"]
+[ext_resource type="Script" uid="uid://bvgfat6ixlear" path="res://scripts/entities/anim_sprite.gd" id="3"]
+
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(31, 76)
+
+[node name="Enemy_201982402352644" type="CharacterBody2D" unique_id=806289251 groups=["enemies"]]
+z_index = 2
+collision_layer = 2
+script = ExtResource("2")
+max_hp = 100
+hp = 100
+contact_damage = 15
+move_dir_mode = 0
+towards_player = 1
+ignore_objects = true
+melee_range = 22.0
+bullet_speed = 450.0
+shoot_interval = 1.2
+gc_id = "201982402352644"
+show_health_bar = true
+health_bar_offset = -25.0
+vis_on_switch = 1
+act_on_switch = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=411471770]
+modulate = Color(0.961, 0.969, 0.98, 1)
+texture = ExtResource("1")
+centered = false
+script = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=671835425]
+position = Vector2(38.5, 42)
+shape = SubResource("sh")
