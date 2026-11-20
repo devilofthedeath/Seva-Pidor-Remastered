@@ -16,9 +16,21 @@ config/features=PackedStringArray("4.7")
 
 [autoload]
 
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+GameEvents="*res://scripts/autoload/GameEvents.gd"
+RunState="*res://scripts/autoload/RunState.gd"
+SceneRouter="*res://scripts/autoload/SceneRouter.gd"
+SaveService="*res://scripts/autoload/SaveService.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DialogueService="*res://scripts/autoload/DialogueService.gd"
 GameState="*res://scripts/autoload/GameState.gd"
 AutoSave="*res://scripts/autoload/AutoSave.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DisplayManager="*res://scripts/autoload/DisplayManager.gd"
+CameraShake="*res://scripts/autoload/CameraShake.gd"
+HitStop="*res://scripts/autoload/HitStop.gd"
+FX="*res://scripts/autoload/FX.gd"
+SettingsService="*res://scripts/autoload/SettingsService.gd"
+PauseManager="*res://scripts/autoload/PauseManager.gd"
 
 [dialogue_manager]
 
@@ -33,11 +45,39 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [gui]
 
 theme/custom="res://assets/fonts/modula_theme.tres"
+
+[input]
+
+shoot={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":90,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":2,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+melee={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":3,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+toggle_fullscreen={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194335,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":true,"script":null)
+]
+}
 
 [internationalization]
 

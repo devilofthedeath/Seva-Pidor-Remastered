@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/enemy_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+description = "Быстрый атакующий враг: просыпается рядом с игроком и ускоряется."
+mode = "platformer"
+speed = 150.0
+max_hp = 45
+hp = 45
+boss = false
+contact_damage = 15
+contact_range = 40.0
+use_gravity = true
+move_dir_mode = 3
+move_shape = 0
+aggro_radius = 170.0
+aggro_speed_multiplier = 1.35
+melee_enabled = true
+melee_range = 92.0
+melee_dash_speed = 720.0
+melee_cooldown = 1.0
+can_shoot = false
+shoot_interval = 1.0
+bullet_speed = 300.0
+bullet_damage = 10
+projectiles_per_shot = 1
+spread_angle_deg = 0.0
+show_health_bar = true
+shake_on_death = false
+death_shake_preset = "heavy"
+spawn_phase_clone = true

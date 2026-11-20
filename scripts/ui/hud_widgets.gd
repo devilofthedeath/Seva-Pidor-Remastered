@@ -12,6 +12,10 @@ var time_left: float = 0.0
 var running: bool = false
 
 func _ready():
+	# Группы оставляем для старых объектов, но основной канал — шина событий.
+	if GameEvents != null:
+		GameEvents.hp_changed.connect(_on_hp_changed)
+		GameEvents.score_changed.connect(_on_score_changed)
 	if widget_type == "HEALTH":
 		add_to_group("hud_health")
 		update_hp(GameState.hp, GameState.max_hp)
@@ -28,6 +32,16 @@ func _ready():
 func on_switch_event(num: int, state: bool):
 	if num == listener_num and state:
 		on_start_timer(timer_id, default_seconds)
+
+func _on_hp_changed(cur: int, mx: int) -> void:
+	update_hp(cur, mx)
+	# Старые ноды всё ещё слушают группу — дублировать не надо,
+	# поэтому здесь только прямой вызов этого виджета.
+
+
+func _on_score_changed(value: int) -> void:
+	update_score(value)
+
 
 func update_hp(cur: int, mx: int):
 	if has_node("Bar"):

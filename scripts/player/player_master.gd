@@ -48,6 +48,34 @@ extends CharacterBody2D
 @export var hurt_invuln_time: float = 0.6
 @export var death_delay: float = 2.0
 @export var jump_freeze: bool = false
+## Показывать ли брызги крови при ранении игрока.
+@export var use_blood_particles: bool = true
+
+@export_group("Приседание и кувырок")
+## Скорость при приседании (для будущей анимации/хитбокса).
+@export var crouch_speed_multiplier: float = 0.35
+@export var roll_speed: float = 480.0
+@export var roll_time: float = 0.28
+@export var roll_cooldown: float = 0.45
+## Спрайты можно поставить позже — пока просто переключаются состояния.
+@export var tex_crouch: Texture2D
+@export var frames_crouch: int = 1
+@export var tex_roll: Texture2D
+@export var frames_roll: int = 1
+
+# --- Смерть ---
+@export_group("Смерть")
+## Горизонтальная скорость "смешного" отлёта после смерти.
+@export var death_launch_speed: float = 520.0
+## Сила подброса вверх при смерти (только платформер).
+@export var death_launch_up: float = 420.0
+## Скорость вращения спрайта при смерти, градусов в секунду.
+@export var death_spin_speed: float = 900.0
+## Множитель гравитации во время смерти (1 = обычная).
+@export var death_gravity_scale: float = 1.0
+## Границы скейла силы отлёта от урона (чтобы не улетать в космос).
+@export var death_launch_min_scale: float = 0.75
+@export var death_launch_max_scale: float = 1.35
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var facing: int = 1
@@ -59,6 +87,17 @@ var invuln_timer: float = 0.0
 var hurt_timer: float = 0.0
 var knockback: Vector2 = Vector2.ZERO
 var knock_timer: float = 0.0
+
+var is_crouching: bool = false
+var is_rolling: bool = false
+var roll_timer: float = 0.0
+var roll_cooldown_timer: float = 0.0
+var roll_dir: int = 1
+
+var _last_hit_from = null
+var _death_spin_dir: float = 1.0
+var _death_spin: float = 900.0
+var _death_launched: bool = false
 
 
 func _ready():
@@ -110,15 +149,24 @@ func _active_bullets() -> int:
 
 
 func _physics_process(delta):
-	if GameState.dialogue_active or is_dead:
+	if is_dead:
+		_process_death(delta)
+		return
+	if GameState.dialogue_active:
 		velocity = Vector2.ZERO
 		return
-	# Отскакивание: на короткое время полностью берём управление движением.
+	# Отскакивание: на короткое время берём управление горизонталью.
+	# Вертикаль не перезаписываем knockback'ом — иначе игрок может улететь вверх.
 	if knock_timer > 0.0:
 		knock_timer -= delta
-		velocity = knockback
 		if mode == "platformer":
-			velocity.y += gravity * delta
+			velocity.x = knockback.x
+			if not is_on_floor():
+				velocity.y += gravity * delta
+			else:
+				velocity.y = 0.0
+		else:
+			velocity = knockback
 		knockback = knockback.move_toward(Vector2.ZERO, 500.0 * delta)
 		move_and_slide()
 		return
@@ -143,7 +191,7 @@ func _physics_process(delta):
 			aim_dir = dir
 		if dir.x != 0:
 			facing = 1 if dir.x > 0 else -1
-		if Input.is_action_pressed("ui_accept") or Input.is_key_pressed(KEY_Z) or Input.is_key_pressed(KEY_CTRL):
+		if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("shoot"):
 			if not is_attacking:
 				_shoot(false)
 		_apply_knock(delta)
@@ -161,9 +209,9 @@ func _physics_process(delta):
 			aim_dir = Vector2.DOWN if rdir.y > 0 else Vector2.UP
 		if has_node("Sprite2D"):
 			$Sprite2D.flip_h = facing < 0
-		if (Input.is_key_pressed(KEY_Z) or Input.is_key_pressed(KEY_CTRL)) and not is_attacking:
+		if Input.is_action_pressed("shoot") and not is_attacking:
 			_shoot(false)
-		elif (Input.is_key_pressed(KEY_X) or Input.is_key_pressed(KEY_SHIFT)) and not is_attacking:
+		elif Input.is_action_pressed("melee") and not is_attacking:
 			_melee(false)
 		if not is_attacking:
 			if rdir.length() > 0:
@@ -174,30 +222,71 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 
-	# 3. Платформер: гравитация, прыжки, наземные и воздушные атаки
+	# 3. Платформер: гравитация, прыжки, приседание, кувырок, атаки
 	var in_air = not is_on_floor()
 	if in_air:
 		velocity.y += gravity * delta
 
-	if (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up")) and not in_air:
-		velocity.y = jump_force
-
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
-		velocity.x = direction * speed
 		facing = 1 if direction > 0 else -1
+
+	roll_cooldown_timer = maxf(0.0, roll_cooldown_timer - delta)
+
+	# Кувырок: вниз + влево/вправо (на земле, с кулдауном).
+	if is_rolling:
+		roll_timer -= delta
+		velocity.x = roll_dir * roll_speed
+		if not in_air:
+			velocity.y = 0.0
+		_set_anim(tex_roll, frames_roll)
+		if roll_timer <= 0.0:
+			is_rolling = false
+		_apply_knock(delta)
+		move_and_slide()
+		return
+
+	if (not in_air and roll_cooldown_timer <= 0.0 and not is_attacking
+			and Input.is_action_pressed("ui_down") and direction != 0):
+		is_rolling = true
+		is_crouching = false
+		roll_dir = 1 if direction > 0 else -1
+		roll_timer = roll_time
+		roll_cooldown_timer = roll_cooldown
+		if has_node("Sprite2D"):
+			$Sprite2D.flip_h = roll_dir < 0
+		GameEvents.request_burst("dust",
+			global_position + body_center + Vector2(float(roll_dir) * 24.0, 0.0),
+			Color(0.75, 0.72, 0.62, 1.0), Vector2(-float(roll_dir), 0.0))
+		_set_anim(tex_roll, frames_roll)
+		velocity.x = roll_dir * roll_speed
+		_apply_knock(delta)
+		move_and_slide()
+		return
+
+	# Приседание: просто зажатый вниз без направления.
+	is_crouching = not in_air and Input.is_action_pressed("ui_down") and not is_attacking
+
+	if not is_crouching and (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up")) and not in_air:
+		velocity.y = jump_force
+
+	if direction != 0:
+		var move_speed := speed * (crouch_speed_multiplier if is_crouching else 1.0)
+		velocity.x = direction * move_speed
 		if has_node("Sprite2D"):
 			$Sprite2D.flip_h = facing < 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
-	if (Input.is_key_pressed(KEY_Z) or Input.is_key_pressed(KEY_CTRL)) and not is_attacking:
+	if Input.is_action_pressed("shoot") and not is_attacking:
 		_shoot(in_air)
-	elif (Input.is_key_pressed(KEY_X) or Input.is_key_pressed(KEY_SHIFT)) and not is_attacking:
+	elif Input.is_action_pressed("melee") and not is_attacking:
 		_melee(in_air)
 
 	if not is_attacking:
-		if in_air and tex_jump != null:
+		if is_crouching and tex_crouch != null:
+			_set_anim(tex_crouch, frames_crouch)
+		elif in_air and tex_jump != null:
 			_set_anim(tex_jump, frames_jump, jump_freeze)
 		elif direction != 0 and tex_move != null:
 			_set_anim(tex_move, frames_move)
@@ -210,7 +299,11 @@ func _physics_process(delta):
 
 func _apply_knock(delta: float):
 	if knockback.length() > 0.5:
-		velocity += knockback
+		if mode == "platformer":
+			# В платформере отброс только горизонтальный, иначе прыжок/гравитация ломаются.
+			velocity.x += knockback.x
+		else:
+			velocity += knockback
 		knockback = knockback.move_toward(Vector2.ZERO, 420.0 * delta)
 
 
@@ -264,9 +357,12 @@ func _shoot(in_air: bool):
 	col.shape = shape
 	b.add_child(col)
 	get_parent().add_child(b)
+	# Игрок атакует какашками — вспышка у дула тоже какашечная.
+	GameEvents.request_burst("poop", b.global_position, Color(0.45, 0.30, 0.16, 1.0), aim)
 
 	await get_tree().create_timer(0.2).timeout
-	is_attacking = false
+	if is_instance_valid(self):
+		is_attacking = false
 
 
 func _melee(in_air: bool):
@@ -276,55 +372,152 @@ func _melee(in_air: bool):
 	elif tex_melee != null:
 		_set_anim(tex_melee, frames_melee)
 
+	GameEvents.request_burst(
+		"muzzle",
+		global_position + Vector2(float(facing) * 32.0, 0.0),
+		Color(1.0, 1.0, 0.72, 1.0),
+		Vector2(float(facing), 0.0),
+	)
+
+	var hit_any := false
 	for body in get_tree().get_nodes_in_group("enemies"):
 		if global_position.distance_to(body.global_position) < 70.0 and body.has_method("take_damage"):
-			body.take_damage(melee_damage)
+			body.take_damage(melee_damage, global_position)
+			# Кровь создаёт сама цель в take_damage() — там учитывается её флаг
+			# use_blood_particles и направление от удара.
+			hit_any = true
 	for area in get_tree().get_nodes_in_group("switch_listeners"):
 		if global_position.distance_to(area.global_position) < 70.0 and area.has_method("on_melee_hit"):
 			area.on_melee_hit()
 	for body in get_tree().get_nodes_in_group("destroyables"):
 		if global_position.distance_to(body.global_position) < 70.0 and body.has_method("take_damage"):
 			body.take_damage(melee_damage)
+			hit_any = true
+	if hit_any:
+		GameEvents.request_hit_stop("hit")
 
 	await get_tree().create_timer(0.2).timeout
-	is_attacking = false
+	if is_instance_valid(self):
+		is_attacking = false
 
 
 func heal(amount: int):
 	GameState.hp = min(max_hp, GameState.hp + amount)
-	get_tree().call_group("hud_health", "update_hp", GameState.hp, max_hp)
+
+
+func _shake_camera(preset: String, amount: int = 0) -> void:
+	GameEvents.request_shake(preset, maxf(0.7, float(amount) / 25.0))
 
 
 func take_damage(amount: int, _from_pos = null):
 	if is_dead or invuln_timer > 0.0:
 		return
+	_last_hit_from = _from_pos
 	invuln_timer = hurt_invuln_time
+	_shake_camera("hit", amount)
+	GameEvents.request_hit_stop("hit" if amount >= 15 else "light")
 	# Слабое короткое отталкивание от источника урона.
 	var away := Vector2(-float(facing), 0.0)
-	if _from_pos != null:
+	if _from_pos is Vector2:
 		var d: Vector2 = global_position - (_from_pos as Vector2)
 		if d.length() > 0.01:
 			away = d.normalized()
+	if use_blood_particles:
+		GameEvents.request_burst("blood", global_position, Color(0.78, 0.10, 0.12, 1.0), away)
+	if mode == "platformer":
+		# По Y не отбрасываем: иначе при попадании снизу/сбоку можно улететь в космос.
+		away.y = 0.0
+		if away.length() < 0.01:
+			away = Vector2(-float(facing), 0.0)
+		away = away.normalized()
 	knockback = away * 260.0
 	knock_timer = 0.18
 	GameState.hp = max(0, GameState.hp - amount)
-	get_tree().call_group("hud_health", "update_hp", GameState.hp, max_hp)
 	if GameState.hp <= 0:
-		_die()
+		_die(amount)
 		return
 	if tex_hit != null:
 		hurt_timer = hurt_invuln_time
 		_set_anim(tex_hit, frames_hit)
 
 
-func _die():
+func _die(amount: int = 0):
+	if is_dead:
+		return
 	is_dead = true
+	is_rolling = false
+	is_crouching = false
+	GameEvents.request_burst("death", global_position, Color(1.0, 0.36, 0.36, 1.0))
+	_shake_camera("death")
 	hurt_timer = 0.0
-	velocity = Vector2.ZERO
 	if tex_dead != null:
 		_set_anim(tex_dead, frames_dead, true)  # последний кадр анимации смерти
 	elif tex_hit != null:
 		_set_anim(tex_hit, frames_hit, true)
+	_start_death_launch(amount)
 	# Экран проигрыша появляется не сразу, а после анимации смерти.
 	await get_tree().create_timer(death_delay).timeout
-	GameState.kill_player()
+	if is_instance_valid(self):
+		GameState.kill_player()
+
+
+func _start_death_launch(amount: int = 0) -> void:
+	# Чем больше урон, тем сильнее отлёт, но с жёстким потолком.
+	var damage_scale := clampf(0.75 + float(amount) / maxf(1.0, float(max_hp)) * 1.5,
+		death_launch_min_scale, death_launch_max_scale)
+	# Направление отлёта — от источника последнего урона, иначе назад от взгляда.
+	var away := Vector2(-float(facing), 0.0)
+	if _last_hit_from is Vector2:
+		var d: Vector2 = global_position - (_last_hit_from as Vector2)
+		if d.length() > 0.01:
+			away = d.normalized()
+	if mode == "platformer":
+		# В платформере — сильный горизонтальный отлёт + подброс вверх.
+		var dir_x := signf(away.x)
+		if absf(dir_x) < 0.01:
+			dir_x = -float(facing)
+		velocity = Vector2(dir_x * death_launch_speed * damage_scale, -death_launch_up * damage_scale)
+	else:
+		velocity = away.normalized() * death_launch_speed * damage_scale
+	# Крутим в сторону, противоположную полёту — так смешнее.
+	_death_spin_dir = -1.0 if velocity.x >= 0.0 else 1.0
+	_death_spin = death_spin_speed * randf_range(0.85, 1.25) * clampf(damage_scale, 0.85, 1.15)
+	_prepare_death_spin()
+	_death_launched = true
+
+
+func _prepare_death_spin() -> void:
+	# Sprite2D у игрока стоит centered = false, поэтому вращение шло бы вокруг
+	# верхнего левого угла. Переводим его в centered и ставим в центр тела —
+	# картинка не смещается, но крутится вокруг себя.
+	if not has_node("Sprite2D"):
+		return
+	var spr: Sprite2D = $Sprite2D
+	var pivot: Vector2 = body_center
+	if pivot == Vector2.ZERO:
+		var frame_size := Vector2(79.0, 95.0)
+		if spr.texture != null:
+			frame_size = spr.texture.get_size() / Vector2(maxi(1, spr.hframes), maxi(1, spr.vframes))
+		pivot = frame_size * 0.5
+	spr.centered = true
+	spr.position = pivot
+
+
+func _process_death(delta: float) -> void:
+	if not _death_launched:
+		return
+	if mode == "platformer":
+		velocity.y += gravity * delta * death_gravity_scale
+	# Постепенно гасим горизонталь, чтобы не улетал бесконечно по земле.
+	velocity.x = move_toward(velocity.x, 0.0, 140.0 * delta)
+	var fall_speed: float = velocity.y
+	move_and_slide()
+	if mode == "platformer" and is_on_floor():
+		# Небольшой "тряпичный" отскок от пола, потом быстро затухаем.
+		if fall_speed > 160.0:
+			velocity.y = -fall_speed * 0.42
+		velocity.x = move_toward(velocity.x, 0.0, 900.0 * delta)
+		_death_spin = move_toward(_death_spin, 0.0, 700.0 * delta)
+	if has_node("Sprite2D"):
+		var spr: Sprite2D = $Sprite2D
+		spr.rotation += deg_to_rad(_death_spin) * delta * _death_spin_dir

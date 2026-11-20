@@ -13,7 +13,9 @@ func _ready() -> void:
 	call_deferred("_check")
 
 
-func _on_scene_changed(_new_scene: Node) -> void:
+# В Godot 4.7 SceneTree.scene_changed приходит БЕЗ аргументов.
+# Если объявить обязательный параметр — будет ошибка на каждой смене сцены.
+func _on_scene_changed(_old_scene = null, _new_scene = null) -> void:
 	call_deferred("_check")
 
 

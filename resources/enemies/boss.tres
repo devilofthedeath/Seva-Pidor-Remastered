@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/enemy_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+description = "Босс: много HP, полоса здоровья, вторая фаза и сильная тряска на смерти."
+mode = "platformer"
+speed = 60.0
+max_hp = 300
+hp = 300
+boss = true
+contact_damage = 25
+contact_range = 48.0
+use_gravity = true
+move_dir_mode = 3
+move_shape = 0
+aggro_radius = 260.0
+aggro_speed_multiplier = 1.5
+melee_enabled = true
+melee_range = 110.0
+melee_dash_speed = 600.0
+melee_cooldown = 0.9
+can_shoot = true
+shoot_interval = 0.8
+bullet_speed = 320.0
+bullet_damage = 15
+projectiles_per_shot = 3
+spread_angle_deg = 18.0
+show_health_bar = true
+shake_on_death = true
+death_shake_preset = "death"
+spawn_phase_clone = true

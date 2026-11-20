@@ -46,6 +46,7 @@ func take_damage(amount: int, _from = null):
 	if infinite_health or hp > 0:
 		return
 	is_dead = true
+	GameEvents.request_burst("death", global_position, Color(0.72, 0.66, 0.55, 1.0))
 	if destroy_score > 0:
 		GameState.add_score(destroy_score)
 	if destroy_switch > 0:
@@ -60,4 +61,5 @@ func take_damage(amount: int, _from = null):
 	if has_node("Sprite2D"):
 		$Sprite2D.visible = false
 	await get_tree().create_timer(0.15).timeout
-	queue_free()
+	if is_instance_valid(self):
+		queue_free()

@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_201981419238989.tscn" id="15_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="16_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207241218507571.tscn" id="17_o"]
-[ext_resource type="AudioStream" uid="uid://b3wncysnxdjvo" path="res://assets/audio/snd_20198211812354367.wav" id="19_bgm"]
 [ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
 [ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
 
@@ -293,5 +292,4 @@ offset_bottom = 25.0
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=517633236]
 process_mode = 4
-stream = ExtResource("19_bgm")
 autoplay = true

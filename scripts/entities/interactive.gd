@@ -126,8 +126,8 @@ func _on_body(body):
 
 
 func on_bullet_hit():
-	# В оригинале переключатели часто срабатывают выстрелом даже без явного флага.
-	if role == "SWITCH":
+	# Пуля активирует объект только при явном by_bullet = true.
+	if role == "SWITCH" and by_bullet and is_active:
 		_activate_switch()
 
 

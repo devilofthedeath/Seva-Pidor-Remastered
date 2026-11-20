@@ -3,7 +3,7 @@ extends AnimatableBody2D
 ## разворачивается при столкновении со стеной (через RayCast2D).
 
 @export var enable_move: bool = true
-@export var move_speed: float = 100.0
+@export var move_speed: float = 10.0
 @export var move_direction: int = 1
 @export var ray_length: float = 26.0
 @export var start_visible: bool = true

@@ -96,6 +96,13 @@ offset_right = 340.0
 offset_bottom = 285.0
 text = "Продолжить"
 
-[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_pressed"]
+[node name="SettingsButton" type="Button" parent="." unique_id=528831324]
+offset_left = 224.0
+offset_top = 292.0
+offset_right = 340.0
+offset_bottom = 319.0
+text = "Настройки"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]

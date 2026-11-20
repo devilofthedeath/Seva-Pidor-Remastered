@@ -18,6 +18,7 @@ func _ready():
 	collision_mask = 3  # слои 1 + 2
 	visible = start_visible
 	origin = global_position
+	velocity = Vector2.ZERO
 	if listener_num > 0:
 		add_to_group("switch_listeners")
 

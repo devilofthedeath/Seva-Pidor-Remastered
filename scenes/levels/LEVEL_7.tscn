@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019814113369397.tscn" id="4_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="5_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_202071902523903.tscn" id="6_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207212228257135.tscn" id="7_o"]
+[ext_resource type="PackedScene" uid="uid://c6ok4att220eu" path="res://scenes/objects/Obj_20207212228257135.tscn" id="7_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207212236535557.tscn" id="8_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020721223889064.tscn" id="9_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020721224315440.tscn" id="10_o"]
@@ -60,20 +60,35 @@ position = Vector2(320, 240)
 [node name="W_5" parent="." unique_id=1333945554 instance=ExtResource("2_o")]
 position = Vector2(400, 240)
 
-[node name="W_6" parent="." unique_id=1731895044 instance=ExtResource("1_o")]
+[node name="Player" parent="." unique_id=1731895044 instance=ExtResource("1_o")]
 position = Vector2(-20, 165)
 tex_hit = null
 tex_dead = null
 frames_dead = 1
 
-[node name="W_7" parent="." unique_id=974867083 instance=ExtResource("7_o")]
+[node name="cart_seva" parent="." unique_id=974867083 instance=ExtResource("7_o")]
 position = Vector2(43, 172)
 
 [node name="W_8" parent="." unique_id=1381363154 instance=ExtResource("8_o")]
 position = Vector2(111, 172)
+collision_layer = 2
+collision_mask = 2
+move_speed = 10.0
+move_direction = 2
 
-[node name="W_9" parent="." unique_id=2105415549 instance=ExtResource("9_o")]
-position = Vector2(145, 180)
+[node name="cart2" parent="." unique_id=2105415549 instance=ExtResource("9_o")]
+position = Vector2(151, 180)
+collision_layer = 2
+collision_mask = 2
+move_speed = 10.0
+move_direction = 2
+
+[node name="cart3" parent="." unique_id=453034727 instance=ExtResource("9_o")]
+position = Vector2(268, 179)
+collision_layer = 2
+collision_mask = 2
+move_speed = 10.0
+move_direction = 2
 
 [node name="W_10" parent="." unique_id=544765019 instance=ExtResource("2_o")]
 position = Vector2(480, 240)
@@ -97,25 +112,12 @@ position = Vector2(875, 240)
 position = Vector2(880, 240)
 
 [node name="W_17" parent="." unique_id=121719508 instance=ExtResource("10_o")]
-position = Vector2(205, 175)
-
-[node name="W_18" parent="." unique_id=785318178 instance=ExtResource("9_o")]
-position = Vector2(266.5, 180)
+position = Vector2(212, 168)
+move_speed = 10.0
+move_direction = 2
 
 [node name="W_19" parent="." unique_id=1054571859 instance=ExtResource("6_o")]
 position = Vector2(0, 160)
-start_active = false
-
-[node name="W_20" parent="." unique_id=1498115817 instance=ExtResource("6_o")]
-position = Vector2(80, 160)
-start_active = false
-
-[node name="W_21" parent="." unique_id=1048688468 instance=ExtResource("6_o")]
-position = Vector2(160, 160)
-start_active = false
-
-[node name="W_22" parent="." unique_id=1506977616 instance=ExtResource("6_o")]
-position = Vector2(240, 160)
 start_active = false
 
 [node name="W_23" parent="." unique_id=648193698 instance=ExtResource("6_o")]
@@ -144,7 +146,7 @@ start_active = false
 
 [node name="W_29" type="CharacterBody2D" parent="." unique_id=1951688009 groups=["enemies"]]
 z_index = -1
-position = Vector2(25, 165)
+position = Vector2(12, 168)
 collision_layer = 256
 collision_mask = 256
 motion_mode = 1
@@ -153,12 +155,15 @@ speed = 120.0
 max_hp = 100
 hp = 100
 infinite_health = true
+gc_id = "2020721225792531"
+contact_damage_enabled = false
 contact_damage = 0
 use_gravity = false
 move_dir_mode = 2
 ignore_objects = true
+aggro_on_damage = false
+melee_enabled = false
 bullet_speed = 150.0
-gc_id = "2020721225792531"
 health_bar_color = Color(0.318, 0.396, 0.682, 1)
 health_bar_offset = -10.0
 vis_on_switch = 1
@@ -182,7 +187,7 @@ position = Vector2(880, 160)
 position = Vector2(900, 155)
 
 [node name="W_32" parent="." unique_id=450687064 instance=ExtResource("12_o")]
-position = Vector2(2, 190)
+position = Vector2(-1, 119)
 
 [node name="W_33" parent="." unique_id=942377459 instance=ExtResource("14_o")]
 
@@ -205,10 +210,10 @@ position = Vector2(400, 0)
 position = Vector2(480, 0)
 
 [node name="W_40" parent="." unique_id=1076586693 instance=ExtResource("14_o")]
-position = Vector2(560, -5)
+position = Vector2(560, 0)
 
 [node name="W_41" parent="." unique_id=1444750350 instance=ExtResource("14_o")]
-position = Vector2(640, -5)
+position = Vector2(640, 0)
 
 [node name="W_42" parent="." unique_id=757261773 instance=ExtResource("14_o")]
 position = Vector2(720, 0)

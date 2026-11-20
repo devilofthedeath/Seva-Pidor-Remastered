@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198121812427564.tscn" id="1_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813014362307.tscn" id="2_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813017593406.tscn" id="3_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813018565638.tscn" id="4_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813035469462.tscn" id="5_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_201981307292138.tscn" id="6_o"]
@@ -90,10 +89,8 @@ layer = -2
 script = ExtResource("bgscroll")
 
 [node name="Bg" type="TextureRect" parent="Sky/Parallax" unique_id=2030633631]
-offset_left = 7.0
-offset_top = 5.0
-offset_right = 6247.0
-offset_bottom = 325.0
+offset_right = 6240.0
+offset_bottom = 320.0
 texture = SubResource("gtb")
 stretch_mode = 1
 
@@ -130,36 +127,6 @@ position = Vector2(560, 240)
 
 [node name="W_9" parent="." unique_id=1604610506 instance=ExtResource("1_o")]
 position = Vector2(640, 240)
-
-[node name="W_10" parent="." unique_id=861210540 instance=ExtResource("8_o")]
-position = Vector2(0, 160)
-
-[node name="W_11" parent="." unique_id=1579929015 instance=ExtResource("8_o")]
-position = Vector2(320, 160)
-
-[node name="W_12" parent="." unique_id=1686128953 instance=ExtResource("9_o")]
-position = Vector2(0, 80)
-
-[node name="W_13" parent="." unique_id=20010457 instance=ExtResource("9_o")]
-position = Vector2(80, 80)
-
-[node name="W_14" parent="." unique_id=1773763760 instance=ExtResource("9_o")]
-position = Vector2(80, 160)
-
-[node name="W_15" parent="." unique_id=1181738439 instance=ExtResource("9_o")]
-position = Vector2(320, 80)
-
-[node name="W_16" parent="." unique_id=1978688226 instance=ExtResource("9_o")]
-position = Vector2(240, 160)
-
-[node name="W_17" parent="." unique_id=1678555685 instance=ExtResource("9_o")]
-position = Vector2(160, 160)
-
-[node name="W_18" parent="." unique_id=805403459 instance=ExtResource("9_o")]
-position = Vector2(240, 80)
-
-[node name="W_19" parent="." unique_id=6234631 instance=ExtResource("9_o")]
-position = Vector2(400, 160)
 
 [node name="W_20" parent="." unique_id=1351106081 instance=ExtResource("14_o")]
 position = Vector2(105, 220)
@@ -206,7 +173,12 @@ position = Vector2(1360, 240)
 
 [node name="W_33" parent="." unique_id=1224005600 instance=ExtResource("15_o")]
 position = Vector2(580, 165)
+max_hp = 200
+hp = 200
 tex_hit = null
+min_shoot_interval = 0.5
+shoot_interval = 1.5
+aim_at_player_center = false
 
 [node name="W_34" parent="." unique_id=32921704 instance=ExtResource("20_o")]
 position = Vector2(720, 185)
@@ -324,9 +296,6 @@ position = Vector2(1110, 210)
 [node name="W_70" parent="." unique_id=698209738 instance=ExtResource("4_o")]
 position = Vector2(1015, 160)
 
-[node name="W_71" parent="." unique_id=754713604 instance=ExtResource("3_o")]
-position = Vector2(1085, 250)
-
 [node name="W_72" parent="." unique_id=1677329552 instance=ExtResource("1_o")]
 position = Vector2(3860, 240)
 
@@ -351,11 +320,16 @@ scale = Vector2(3.25, 3.75)
 
 [node name="W_79" parent="." unique_id=215349925 instance=ExtResource("18_o")]
 position = Vector2(3430, 160)
+turn_to_player = 1
 tex_hit = null
 
 [node name="W_80" parent="." unique_id=1083049358 instance=ExtResource("18_o")]
 position = Vector2(3895, 160)
+max_hp = 200
+hp = 200
+turn_to_player = 1
 tex_hit = null
+aim_at_player_center = false
 
 [node name="W_82" parent="." unique_id=1769250640 instance=ExtResource("1_o")]
 position = Vector2(4335, 240)
@@ -430,10 +404,13 @@ tex_hit = null
 [node name="W_104" type="CharacterBody2D" parent="." unique_id=832635953 groups=["enemies"]]
 z_index = 2
 position = Vector2(80, 175)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("25_tpqgf")
 speed = 240.0
 max_hp = 500
 hp = 500
+gc_id = "2020726759337367"
 contact_damage = 0
 use_gravity = false
 move_dir_mode = 2
@@ -444,7 +421,6 @@ bullet_speed = 450.0
 bullet_damage = 30
 bullet_tex = ExtResource("26_ih87n")
 bullet_shape = Vector2(27, 35)
-gc_id = "2020726759337367"
 death_switch = 33
 health_bar_color = Color(0.318, 0.396, 0.682, 1)
 health_bar_offset = -10.0
@@ -467,6 +443,8 @@ shape = SubResource("sh")
 z_index = -1
 position = Vector2(0, -35)
 scale = Vector2(0.75, 1)
+collision_layer = 256
+collision_mask = 256
 melee_enabled = false
 
 [node name="W_106" parent="." unique_id=1271762667 instance=ExtResource("42_o")]
@@ -717,8 +695,8 @@ position = Vector2(5195, 175)
 [node name="W_183" parent="." unique_id=214125755 instance=ExtResource("14_o")]
 position = Vector2(4000, 215)
 
-[node name="W_184" parent="." unique_id=206023886 instance=ExtResource("12_o")]
-position = Vector2(-1, 172)
+[node name="Player" parent="." unique_id=206023886 instance=ExtResource("12_o")]
+position = Vector2(0, 168)
 tex_hit = null
 tex_dead = null
 frames_dead = 1
@@ -895,3 +873,37 @@ offset_bottom = 55.0
 process_mode = 4
 stream = ExtResource("64_bgm")
 autoplay = true
+
+[node name="repeat_bg" type="Node2D" parent="." unique_id=279579027]
+
+[node name="W_10" parent="repeat_bg" unique_id=1554631506 instance=ExtResource("8_o")]
+position = Vector2(0, 160)
+
+[node name="W_11" parent="repeat_bg" unique_id=2064047910 instance=ExtResource("8_o")]
+position = Vector2(320, 160)
+
+[node name="W_14" parent="repeat_bg" unique_id=457793901 instance=ExtResource("9_o")]
+position = Vector2(80, 160)
+collision_layer = 256
+collision_mask = 256
+
+[node name="W_13" parent="repeat_bg" unique_id=1028603895 instance=ExtResource("9_o")]
+position = Vector2(80, 80)
+
+[node name="W_12" parent="repeat_bg" unique_id=1815062861 instance=ExtResource("9_o")]
+position = Vector2(0, 80)
+
+[node name="W_16" parent="repeat_bg" unique_id=687396089 instance=ExtResource("9_o")]
+position = Vector2(240, 160)
+
+[node name="W_17" parent="repeat_bg" unique_id=1540924753 instance=ExtResource("9_o")]
+position = Vector2(160, 160)
+
+[node name="W_19" parent="repeat_bg" unique_id=1460418525 instance=ExtResource("9_o")]
+position = Vector2(400, 160)
+
+[node name="W_15" parent="repeat_bg" unique_id=690424030 instance=ExtResource("9_o")]
+position = Vector2(320, 80)
+
+[node name="W_18" parent="repeat_bg" unique_id=1263024754 instance=ExtResource("9_o")]
+position = Vector2(240, 80)
