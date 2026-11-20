@@ -1,64 +1,87 @@
-[gd_scene load_steps=11 format=3]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019812162208910.tscn" id="1_o"]
+[gd_scene load_steps=10 format=3]
+
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="2_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081422367759.tscn" id="3_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202081425493498.tscn" id="4_o"]
-[ext_resource type="AudioStream" path="res://assets/audio/snd_20207291121517911.wav" id="5_bgm"]
-[ext_resource type="Script" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
-[ext_resource type="Script" path="res://scripts/entities/level_bounds.gd" id="bounds"]
-[ext_resource type="Script" path="res://scripts/ui/retry_button.gd" id="retry"]
+[ext_resource type="AudioStream" uid="uid://dgeybbgmfi2a6" path="res://assets/audio/snd_20207291121517911.wav" id="5_bgm"]
+[ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
+[ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
+[ext_resource type="Script" uid="uid://b0dsnekcog5ax" path="res://scripts/ui/retry_button.gd" id="retry"]
+[ext_resource type="Script" path="res://scripts/ui/localized_button.gd" id="loc_btn"]
+
 [sub_resource type="Gradient" id="gb"]
-colors = PackedColorArray(0.714, 0.235, 0.208, 1.000, 0.192, 0.133, 0.165, 1.000)
+colors = PackedColorArray(0.714, 0.235, 0.208, 1, 0.192, 0.133, 0.165, 1)
+
 [sub_resource type="GradientTexture2D" id="gtb"]
 gradient = SubResource("gb")
-fill_to = Vector2(1, 1)
 width = 480
 height = 320
-[node name="2019812162207492" type="Node2D"]
-[node name="Sky" type="CanvasLayer" parent="."]
+fill_to = Vector2(1, 1)
+
+[node name="2019812162207492" type="Node2D" unique_id=2080215226]
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=375214008]
 layer = -2
-[node name="Parallax" type="Node2D" parent="Sky"]
+
+[node name="Parallax" type="Node2D" parent="Sky" unique_id=2010099775]
 script = ExtResource("bgscroll")
-scroll_factor = 1.0
-[node name="Bg" type="TextureRect" parent="Sky/Parallax"]
-size = Vector2(480, 320)
+
+[node name="Bg" type="TextureRect" parent="Sky/Parallax" unique_id=827115326]
+offset_right = 720.0
+offset_bottom = 480.0
 texture = SubResource("gtb")
 stretch_mode = 1
-[node name="LevelBounds" type="Node" parent="."]
-script = ExtResource("bounds")
-level_width = 480
-level_height = 320
-[node name="W_0" parent="." instance=ExtResource("1_o")]
-position = Vector2(235.0, 110.0)
-scale = Vector2(1.0, 1.0)
-[node name="W_1" parent="." instance=ExtResource("3_o")]
-position = Vector2(148.0, 116.0)
-scale = Vector2(2.3, 2.6)
-[node name="W_2" parent="." instance=ExtResource("4_o")]
-position = Vector2(235.0, 40.0)
-scale = Vector2(0.5, 0.5)
-[node name="HUD" type="CanvasLayer" parent="."]
-layer = 10
-[node name="Hud_0" parent="HUD" instance=ExtResource("2_o")]
-position = Vector2(60.0, 25.0)
-scale = Vector2(1.0, 1.0)
-[node name="BGM" type="AudioStreamPlayer" parent="."]
-process_mode = 4
-stream = ExtResource("5_bgm")
-autoplay = true
 
-[node name="RetryButton" type="Button" parent="HUD"]
+[node name="LevelBounds" type="Node" parent="." unique_id=1805525332]
+script = ExtResource("bounds")
+
+[node name="W_1" parent="." unique_id=354539993 instance=ExtResource("3_o")]
+position = Vector2(280, 120.00001)
+scale = Vector2(2.3, 2.6)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1107311653]
+layer = 10
+
+[node name="Hud_0" parent="HUD" unique_id=585112219 instance=ExtResource("2_o")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 25.0
+
+[node name="RetryButton" type="Button" parent="HUD" unique_id=802063293]
 custom_minimum_size = Vector2(180, 32)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -90.0
-offset_top = -48.0
-offset_right = 90.0
-offset_bottom = -16.0
+offset_left = -120.0
+offset_top = -272.0
+offset_right = 104.0
+offset_bottom = -208.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Попробовать ещё раз"
 script = ExtResource("retry")
+
+[node name="MenuButton" type="Button" parent="HUD" unique_id=1572588251]
+custom_minimum_size = Vector2(180, 32)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -144.0
+offset_right = 84.0
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Главное меню"
+script = ExtResource("retry")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=420735951]
+process_mode = 4
+stream = ExtResource("5_bgm")
+autoplay = true

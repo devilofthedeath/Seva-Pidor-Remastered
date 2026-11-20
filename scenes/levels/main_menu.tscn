@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bafmx456swp1s"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="1_cn35j"]
 [ext_resource type="Script" uid="uid://22io182ax8as" path="res://scenes/levels/main_menu.gd" id="1_wko7x"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019813017593406.tscn" id="7_wgqco"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="8_7gp8n"]
 [ext_resource type="AudioStream" uid="uid://moacqqnojio" path="res://assets/audio/snd_20207292326522797.wav" id="9_gdcvq"]
+[ext_resource type="Script" path="res://scripts/ui/localized_button.gd" id="loc_btn"]
 
 [sub_resource type="Gradient" id="gb"]
 colors = PackedColorArray(0.4, 0.212, 0.349, 1, 0, 0.318, 0.384, 1)
@@ -89,6 +90,7 @@ offset_right = 276.0
 offset_bottom = 251.0
 text = "START"
 
+script = ExtResource("loc_btn")
 [node name="ContinueButton" type="Button" parent="." unique_id=528831323]
 offset_left = 224.0
 offset_top = 258.0
@@ -96,6 +98,7 @@ offset_right = 340.0
 offset_bottom = 285.0
 text = "Продолжить"
 
+script = ExtResource("loc_btn")
 [node name="SettingsButton" type="Button" parent="." unique_id=528831324]
 offset_left = 224.0
 offset_top = 292.0
@@ -103,6 +106,7 @@ offset_right = 340.0
 offset_bottom = 319.0
 text = "Настройки"
 
+script = ExtResource("loc_btn")
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]

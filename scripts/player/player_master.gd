@@ -57,11 +57,21 @@ extends CharacterBody2D
 @export var roll_speed: float = 480.0
 @export var roll_time: float = 0.28
 @export var roll_cooldown: float = 0.45
+@export var roll_invulnerable: bool = true
+## Во время кувырка неуязвимость действует столько секунд
+## (0 = весь кувырок).
+@export var roll_invuln_time: float = 0.0
 ## Спрайты можно поставить позже — пока просто переключаются состояния.
 @export var tex_crouch: Texture2D
 @export var frames_crouch: int = 1
 @export var tex_roll: Texture2D
 @export var frames_roll: int = 1
+## Высота коллизии при приседании/кувырке в долях от обычной.
+## 0.6 => на 40% ниже, низ коллизии остаётся на месте.
+@export var crouch_collision_ratio: float = 0.62
+@export var roll_collision_ratio: float = 0.55
+## Дополнительно «прижать» низ коллизии к земле, пикселей.
+@export var collision_bottom_offset: float = 2.0
 
 # --- Смерть ---
 @export_group("Смерть")
@@ -93,6 +103,11 @@ var is_rolling: bool = false
 var roll_timer: float = 0.0
 var roll_cooldown_timer: float = 0.0
 var roll_dir: int = 1
+var roll_invuln_timer: float = 0.0
+var _base_shape_size: Vector2 = Vector2.ZERO
+var _base_shape_pos: Vector2 = Vector2.ZERO
+var _body_shape: RectangleShape2D = null
+var _body_col: CollisionShape2D = null
 
 var _last_hit_from = null
 var _death_spin_dir: float = 1.0
@@ -107,6 +122,23 @@ func _ready():
 	# и толкать ящики.
 	collision_layer = 2
 	collision_mask = 5  # 1 | 4: блоки + ящики, НЕ актёры
+	if has_node("CollisionShape2D") and $CollisionShape2D.shape is RectangleShape2D:
+		_body_col = $CollisionShape2D
+		_body_shape = _body_col.shape.duplicate() as RectangleShape2D
+		_body_col.shape = _body_shape
+		_base_shape_size = _body_shape.size
+		_base_shape_pos = _body_col.position
+
+
+func _apply_body_collision(ratio: float):
+	if _body_shape == null or _base_shape_size.y <= 0.0:
+		return
+	var h := maxf(4.0, _base_shape_size.y * clampf(ratio, 0.2, 1.0))
+	if absf(_body_shape.size.y - h) < 0.01:
+		return
+	_body_shape.size.y = h
+	# Нижняя граница остаётся на земле (+ небольшой визуальный «прижим»).
+	_body_col.position.y = _base_shape_pos.y + (_base_shape_size.y - h) * 0.5 + collision_bottom_offset
 
 
 func _set_anim(tex: Texture2D, f_count: int, freeze_last: bool = false):
@@ -232,6 +264,13 @@ func _physics_process(delta):
 		facing = 1 if direction > 0 else -1
 
 	roll_cooldown_timer = maxf(0.0, roll_cooldown_timer - delta)
+	roll_invuln_timer = maxf(0.0, roll_invuln_timer - delta)
+	if is_rolling:
+		_apply_body_collision(roll_collision_ratio)
+	elif is_crouching:
+		_apply_body_collision(crouch_collision_ratio)
+	else:
+		_apply_body_collision(1.0)
 
 	# Кувырок: вниз + влево/вправо (на земле, с кулдауном).
 	if is_rolling:
@@ -253,6 +292,7 @@ func _physics_process(delta):
 		roll_dir = 1 if direction > 0 else -1
 		roll_timer = roll_time
 		roll_cooldown_timer = roll_cooldown
+		roll_invuln_timer = roll_invuln_time if roll_invuln_time > 0.0 else roll_time
 		if has_node("Sprite2D"):
 			$Sprite2D.flip_h = roll_dir < 0
 		GameEvents.request_burst("dust",
@@ -372,13 +412,6 @@ func _melee(in_air: bool):
 	elif tex_melee != null:
 		_set_anim(tex_melee, frames_melee)
 
-	GameEvents.request_burst(
-		"muzzle",
-		global_position + Vector2(float(facing) * 32.0, 0.0),
-		Color(1.0, 1.0, 0.72, 1.0),
-		Vector2(float(facing), 0.0),
-	)
-
 	var hit_any := false
 	for body in get_tree().get_nodes_in_group("enemies"):
 		if global_position.distance_to(body.global_position) < 70.0 and body.has_method("take_damage"):
@@ -391,7 +424,7 @@ func _melee(in_air: bool):
 			area.on_melee_hit()
 	for body in get_tree().get_nodes_in_group("destroyables"):
 		if global_position.distance_to(body.global_position) < 70.0 and body.has_method("take_damage"):
-			body.take_damage(melee_damage)
+			body.take_damage(melee_damage, global_position)
 			hit_any = true
 	if hit_any:
 		GameEvents.request_hit_stop("hit")
@@ -411,6 +444,9 @@ func _shake_camera(preset: String, amount: int = 0) -> void:
 
 func take_damage(amount: int, _from_pos = null):
 	if is_dead or invuln_timer > 0.0:
+		return
+	if is_rolling and roll_invulnerable and roll_invuln_timer > 0.0:
+		return
 		return
 	_last_hit_from = _from_pos
 	invuln_timer = hurt_invuln_time

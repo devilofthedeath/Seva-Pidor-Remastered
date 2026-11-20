@@ -4,4 +4,4 @@ func _ready():
 	pressed.connect(_on_pressed)
 
 func _on_pressed():
-	GameState.retry_level()
+	get_tree().change_scene_to_file("res://scenes/levels/main_menu.tscn")

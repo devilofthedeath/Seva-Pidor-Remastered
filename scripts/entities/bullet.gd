@@ -49,7 +49,7 @@ func _on_body(body):
 		return
 	if team == "player" and body.is_in_group("destroyables") and body.has_method("take_damage"):
 		GameEvents.request_burst("poop", global_position, BURST_POOP, velocity.normalized())
-		body.take_damage(damage)
+		body.take_damage(damage, global_position)
 		queue_free()
 		return
 	if body.is_in_group("blocks") or body.is_in_group("pushables"):

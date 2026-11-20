@@ -3,4 +3,4 @@ extends "res://scripts/roles/role_base.gd"
 
 func _on_body(body):
 	if is_active and body.has_method("take_damage"):
-		body.take_damage(damage)
+		body.take_damage(damage, global_position)

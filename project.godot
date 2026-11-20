@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Seva Pidor: Origins"
-run/main_scene="uid://bafmx456swp1s"
+run/main_scene="res://scenes/levels/main_menu.tscn"
 config/features=PackedStringArray("4.7")
 
 [autoload]
@@ -24,6 +24,7 @@ SaveService="*res://scripts/autoload/SaveService.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DialogueService="*res://scripts/autoload/DialogueService.gd"
 GameState="*res://scripts/autoload/GameState.gd"
+Localization="*res://scripts/autoload/Localization.gd"
 AutoSave="*res://scripts/autoload/AutoSave.gd"
 DisplayManager="*res://scripts/autoload/DisplayManager.gd"
 CameraShake="*res://scripts/autoload/CameraShake.gd"
@@ -38,8 +39,8 @@ runtime/balloon_path="res://scenes/ui/dima_small_balloon.tscn"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=320
+window/size/viewport_width=720
+window/size/viewport_height=480
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

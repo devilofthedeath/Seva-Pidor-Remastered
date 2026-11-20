@@ -54,7 +54,9 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020727114219908.tscn" id="50_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207272045341660.tscn" id="51_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207272358237906.tscn" id="52_o"]
+[ext_resource type="Texture2D" uid="uid://c80a0yqcmnucm" path="res://assets/sprites/seva-down.png" id="53_ih87n"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207282251462032.tscn" id="53_o"]
+[ext_resource type="Texture2D" uid="uid://cec14m7n5e8k6" path="res://assets/sprites/seva-rolling.png" id="54_8ck47"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20207282255217137.tscn" id="54_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020729025526651.tscn" id="55_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_202111191143971.tscn" id="56_o"]
@@ -700,6 +702,9 @@ position = Vector2(0, 168)
 tex_hit = null
 tex_dead = null
 frames_dead = 1
+tex_crouch = ExtResource("53_ih87n")
+tex_roll = ExtResource("54_8ck47")
+frames_roll = 3
 
 [node name="W_185" parent="." unique_id=1766278501 instance=ExtResource("59_o")]
 position = Vector2(5200, 145)

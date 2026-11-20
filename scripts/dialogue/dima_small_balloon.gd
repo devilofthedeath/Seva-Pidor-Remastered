@@ -15,6 +15,10 @@ extends CanvasLayer
 @export var will_block_other_input: bool = true
 
 ## The action to use for advancing the dialogue
+## Печать текста как на клавиатуре: базовая задержка, разброс и пауза на знаках.
+@export var typing_base_delay: float = 0.042
+@export var typing_jitter: float = 0.022
+@export var typing_pause_punctuation: float = 0.14
 @export var next_action: StringName = &"ui_accept"
 
 ## The action to use to skip typing the dialogue
@@ -76,6 +80,7 @@ var mutation_cooldown: Timer = Timer.new()
 
 func _ready() -> void:
 	balloon.hide()
+	dialogue_label.spoke.connect(_on_typing_step)
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 	# If the responses menu doesn't have a next action set, use this one
@@ -126,6 +131,13 @@ func start(with_dialogue_resource: DialogueResource = null, cue: String = "", ex
 
 
 ## Apply any changes to the balloon given a new [DialogueLine].
+func _on_typing_step(letter: String, _letter_index: int, _speed: float) -> void:
+	var step := typing_base_delay + randf_range(-typing_jitter, typing_jitter)
+	if letter != "" and ".,!?…:;".contains(letter):
+		step += typing_pause_punctuation
+	dialogue_label.seconds_per_step = maxf(0.008, step)
+
+
 func apply_dialogue_line() -> void:
 	mutation_cooldown.stop()
 
@@ -156,6 +168,7 @@ func apply_dialogue_line() -> void:
 
 	dialogue_label.show()
 	if not dialogue_line.text.is_empty():
+		dialogue_label.seconds_per_step = typing_base_delay
 		dialogue_label.type_out()
 		await dialogue_label.finished_typing
 

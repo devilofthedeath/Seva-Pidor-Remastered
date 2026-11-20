@@ -115,7 +115,7 @@ func _on_body(body):
 		_activate_switch()
 	elif role == "HURTING ZONE":
 		if body.has_method("take_damage"):
-			body.take_damage(damage)
+			body.take_damage(damage, global_position)
 	elif role == "TELEPORT START":
 		var ends = get_tree().get_nodes_in_group("teleport_end")
 		if ends.size() > 0:
