@@ -57,8 +57,12 @@ const BULLET_SCRIPT: Script = preload("res://scripts/entities/bullet.gd")
 @export_group("Получение урона")
 @export var receive_knockback: bool = true
 @export var knockback_strength: float = 220.0
+## Может ли враг подпрыгивать (и при ранении, и через hop()).
+@export var can_hop: bool = true
 ## Фиксированный маленький подскок при ранении (не складывается от пуль).
 @export var knockback_hop: float = 95.0
+## Максимальная высота прыжка на объект, пикселей ( жёсткий потолок 42 ).
+@export var hop_max_height: float = 42.0
 @export var knockback_time: float = 0.16
 ## Затухание отброса: при столкновении/полёте и при обычном движении.
 @export var knockback_decay: float = 450.0
@@ -217,7 +221,22 @@ func _ready():
 func _make_hp_bar():
 	hp_bar = ProgressBar.new()
 	hp_bar.custom_minimum_size = Vector2(health_bar_width, health_bar_height)
-	hp_bar.position = Vector2(-health_bar_width / 2.0, health_bar_offset)
+	# Спрайты в оригинале с centered = false, поэтому центр тела смещён
+	# относительно начала координат врага. Берём центр текущего кадра,
+	# чтобы полоска была ровно по центру и над спрайтом, а не левее.
+	var center := Vector2.ZERO
+	var sprite_top := 0.0
+	if has_node("Sprite2D"):
+		var spr: Sprite2D = $Sprite2D
+		var tex: Texture2D = spr.texture
+		if tex != null:
+			var frame_size := Vector2(
+				tex.get_width() / maxf(1.0, float(spr.hframes)),
+				tex.get_height() / maxf(1.0, float(spr.vframes))
+			)
+			center = spr.position if spr.centered else spr.position + frame_size * 0.5
+			sprite_top = center.y - frame_size.y * 0.5
+	hp_bar.position = Vector2(center.x - health_bar_width / 2.0, sprite_top + health_bar_offset)
 	hp_bar.min_value = 0.0
 	hp_bar.max_value = max(1.0, float(max_hp))
 	hp_bar.value = hp
@@ -401,6 +420,23 @@ func _body_center(node: Node2D) -> Vector2:
 	return node.global_position
 
 
+## Прыжок на объект/платформу высотой не более 42 px.
+## max_height < 0 — взять hop_max_height из инспектора.
+## Возвращает true, если прыжок реально состоялся.
+func hop(max_height: float = -1.0) -> bool:
+	if not can_hop or mode != "platformer":
+		return false
+	if not is_active or is_dying or not is_on_floor():
+		return false
+	var g := float(gravity) * gravity_scale
+	if g <= 0.001:
+		return false
+	# Жёсткий потолок 42 px, иначе можно запрыгнуть на любую высоту.
+	var h := clampf(hop_max_height if max_height < 0.0 else max_height, 1.0, 42.0)
+	velocity.y = -sqrt(2.0 * g * h)
+	return true
+
+
 func _aim_at_target(player: Node2D) -> Vector2:
 	var from := _body_center(self) if aim_at_player_center else global_position
 	var to := _body_center(player) if aim_at_player_center else player.global_position
@@ -455,6 +491,9 @@ func _generic_move(delta, player):
 		if is_on_wall():
 			dir *= -1
 			move_vec = -move_vec
+			# Если включён can_hop — пытаемся перепрыгнуть препятствие до 42 px.
+			if can_hop:
+				hop()
 
 	if has_node("Sprite2D"):
 		if _should_face_player(player):
@@ -588,7 +627,7 @@ func take_damage(amount: int, _from_pos = null):
 			away = away.normalized()
 		knockback = away * knockback_strength
 		knock_timer = knockback_time
-		if mode == "platformer" and knockback_hop > 0.0 and not is_dying:
+		if mode == "platformer" and can_hop and knockback_hop > 0.0 and not is_dying:
 			# Не складываемся: каждый удар задаёт один и тот же потолок подскока.
 			velocity.y = minf(velocity.y, -knockback_hop)
 

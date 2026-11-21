@@ -646,9 +646,6 @@ position = Vector2(5050, -35)
 tex_hit = null
 frames_hit = 1
 
-[node name="W_168" parent="." unique_id=58595536 instance=ExtResource("13_o")]
-position = Vector2(4560, 175)
-
 [node name="W_169" parent="." unique_id=1198948704 instance=ExtResource("35_o")]
 position = Vector2(5145, -75)
 

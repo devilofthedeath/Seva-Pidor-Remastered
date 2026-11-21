@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://defanbp335nae" path="res://assets/sprites/20198231642287267_1f.png" id="7_6qwag"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824017299767.tscn" id="7_o"]
 [ext_resource type="Script" uid="uid://bvgfat6ixlear" path="res://scripts/entities/anim_sprite.gd" id="8_k1a6b"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_201982402352644.tscn" id="8_o"]
+[ext_resource type="PackedScene" uid="uid://cadppueoidtu7" path="res://scenes/objects/Obj_201982402352644.tscn" id="8_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824031422109.tscn" id="9_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824036368756.tscn" id="10_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824039166539.tscn" id="11_o"]
@@ -29,43 +29,53 @@ layer = -2
 script = ExtResource("bgscroll")
 
 [node name="Bg" type="ColorRect" parent="Sky/Parallax" unique_id=1617943376]
-offset_right = 480.0
-offset_bottom = 320.0
+offset_left = -280.0
+offset_top = -16.0
+offset_right = 608.0
+offset_bottom = 376.0
+scale = Vector2(4.3844175, 1.154146)
 color = Color(0.231, 0.188, 0.235, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="LevelBounds" type="Node" parent="." unique_id=532597346]
 script = ExtResource("bounds")
 
 [node name="W_0" parent="." unique_id=1603504046 instance=ExtResource("3_o")]
-position = Vector2(0, 240)
+position = Vector2(0, 304)
+
+[node name="W_9" parent="." unique_id=152308033 instance=ExtResource("3_o")]
+position = Vector2(-80, 304)
+
+[node name="W_15" parent="." unique_id=115320543 instance=ExtResource("3_o")]
+position = Vector2(-160, 304)
 
 [node name="W_1" parent="." unique_id=760906446 instance=ExtResource("3_o")]
-position = Vector2(80, 240)
+position = Vector2(80, 304)
 
 [node name="W_2" parent="." unique_id=640695942 instance=ExtResource("3_o")]
-position = Vector2(160, 240)
+position = Vector2(160, 304)
 
 [node name="W_3" parent="." unique_id=138988504 instance=ExtResource("3_o")]
-position = Vector2(240, 240)
+position = Vector2(240, 304)
 
 [node name="W_4" parent="." unique_id=835199841 instance=ExtResource("3_o")]
-position = Vector2(320, 240)
+position = Vector2(320, 304)
 
 [node name="W_5" parent="." unique_id=1464808632 instance=ExtResource("3_o")]
-position = Vector2(400, 240)
+position = Vector2(400, 304)
 
 [node name="W_6" parent="." unique_id=45127223 instance=ExtResource("4_o")]
-position = Vector2(200, 165)
+position = Vector2(238, 224)
 
 [node name="W_7" parent="." unique_id=2049107319 instance=ExtResource("5_o")]
-position = Vector2(300, 175)
+position = Vector2(338, 234)
 
 [node name="W_8" parent="." unique_id=1405856095 instance=ExtResource("5_o")]
-position = Vector2(10, 165)
+position = Vector2(48, 224)
 
 [node name="table_r" type="CharacterBody2D" parent="." unique_id=1449939415 groups=["pushables"]]
 z_index = 2
-position = Vector2(350, 175)
+position = Vector2(388, 234)
 script = ExtResource("6_bt8ut")
 gc_id = "20198231657204252"
 
@@ -81,37 +91,49 @@ scale = Vector2(1, 0.39999998)
 shape = SubResource("sh")
 
 [node name="W_10" parent="." unique_id=995089556 instance=ExtResource("3_o")]
-position = Vector2(-80, 160)
+position = Vector2(-208, 192)
 
 [node name="W_24" parent="." unique_id=341069707 instance=ExtResource("3_o")]
-position = Vector2(480, 160)
+position = Vector2(480, 304)
+
+[node name="W_33" parent="." unique_id=353239931 instance=ExtResource("3_o")]
+position = Vector2(560, 304)
+
+[node name="W_34" parent="." unique_id=2055523733 instance=ExtResource("3_o")]
+position = Vector2(640, 304)
+
+[node name="W_35" parent="." unique_id=1560553980 instance=ExtResource("3_o")]
+position = Vector2(720, 304)
 
 [node name="W_25" parent="." unique_id=1574160712 instance=ExtResource("3_o")]
-position = Vector2(480, 80)
+position = Vector2(664, 168)
 
 [node name="W_26" parent="." unique_id=332448863 instance=ExtResource("3_o")]
-position = Vector2(-80, 80)
+position = Vector2(-208, 112)
 
 [node name="W_11" parent="." unique_id=600416147 instance=ExtResource("5_o")]
-position = Vector2(150, 170)
+position = Vector2(188, 229)
 
 [node name="W_12" parent="." unique_id=796432465 instance=ExtResource("1_o")]
-position = Vector2(130, 175)
+position = Vector2(168, 234)
 tex_hit = null
 tex_dead = null
 frames_dead = 1
 
-[node name="W_13" parent="." unique_id=1621538082 instance=ExtResource("8_o")]
-position = Vector2(245, 175)
-collision_layer = 2
-tex_hit = null
+[node name="Enemy" parent="." unique_id=1621538082 instance=ExtResource("8_o")]
+position = Vector2(283, 234)
+max_hp = 80
+hp = 80
+move_shape = 1
+ignore_objects = false
+turn_to_player = 1
 
 [node name="W_14" parent="." unique_id=1072959141 instance=ExtResource("7_o")]
-position = Vector2(150, 200)
+position = Vector2(188, 259)
 
 [node name="table_l" type="CharacterBody2D" parent="." unique_id=556184887 groups=["pushables"]]
 z_index = 2
-position = Vector2(65, 175)
+position = Vector2(103, 234)
 script = ExtResource("6_bt8ut")
 gc_id = "20198231657204252"
 
@@ -130,25 +152,50 @@ shape = SubResource("sh")
 position = Vector2(60, 70)
 
 [node name="W_17" parent="." unique_id=387975774 instance=ExtResource("10_o")]
-position = Vector2(10, 175)
-collision_layer = 2
+position = Vector2(-64, 232)
+move_dir_mode = 1
 
 [node name="W_18" parent="." unique_id=54302930 instance=ExtResource("11_o")]
+position = Vector2(0, -16)
+
+[node name="W_36" parent="." unique_id=958778855 instance=ExtResource("11_o")]
+position = Vector2(-80, -16)
+
+[node name="W_37" parent="." unique_id=549710167 instance=ExtResource("11_o")]
+position = Vector2(-160, -16)
 
 [node name="W_19" parent="." unique_id=1420557915 instance=ExtResource("11_o")]
-position = Vector2(80, 0)
+position = Vector2(80, -16)
 
 [node name="W_20" parent="." unique_id=2096283894 instance=ExtResource("11_o")]
-position = Vector2(160, 0)
+position = Vector2(160, -16)
 
 [node name="W_21" parent="." unique_id=672313453 instance=ExtResource("11_o")]
-position = Vector2(240, 0)
+position = Vector2(240, -16)
 
 [node name="W_22" parent="." unique_id=1126032026 instance=ExtResource("11_o")]
-position = Vector2(320, 0)
+position = Vector2(320, -16)
 
 [node name="W_23" parent="." unique_id=1531083664 instance=ExtResource("11_o")]
-position = Vector2(400, 0)
+position = Vector2(400, -16)
+
+[node name="W_27" parent="." unique_id=1628832528 instance=ExtResource("11_o")]
+position = Vector2(480, -16)
+
+[node name="W_28" parent="." unique_id=1912476481 instance=ExtResource("11_o")]
+position = Vector2(560, -16)
+
+[node name="W_29" parent="." unique_id=1037932940 instance=ExtResource("11_o")]
+position = Vector2(640, -16)
+
+[node name="W_30" parent="." unique_id=27320865 instance=ExtResource("11_o")]
+position = Vector2(720, -16)
+
+[node name="W_31" parent="." unique_id=826899842 instance=ExtResource("11_o")]
+position = Vector2(800, -16)
+
+[node name="W_32" parent="." unique_id=1808193752 instance=ExtResource("11_o")]
+position = Vector2(880, -16)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1336020326]
 layer = 10
@@ -160,6 +207,7 @@ offset_left = 60.0
 offset_top = 25.0
 offset_right = 60.0
 offset_bottom = 25.0
+metadata/_edit_use_anchors_ = true
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1882575127]
 process_mode = 4

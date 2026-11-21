@@ -447,7 +447,6 @@ func take_damage(amount: int, _from_pos = null):
 		return
 	if is_rolling and roll_invulnerable and roll_invuln_timer > 0.0:
 		return
-		return
 	_last_hit_from = _from_pos
 	invuln_timer = hurt_invuln_time
 	_shake_camera("hit", amount)
@@ -464,7 +463,11 @@ func take_damage(amount: int, _from_pos = null):
 		# По Y не отбрасываем: иначе при попадании снизу/сбоку можно улететь в космос.
 		away.y = 0.0
 		if away.length() < 0.01:
-			away = Vector2(-float(facing), 0.0)
+			# Удар строго сверху/снизу: сначала отбрасываем назад от движения,
+			# и только если игрок стоит — от взгляда. Иначе получалось
+			# «всегда в одну сторону» при любом вертикальном попадании.
+			var moving := signf(velocity.x)
+			away = Vector2(-moving if absf(moving) > 0.01 else -float(facing), 0.0)
 		away = away.normalized()
 	knockback = away * 260.0
 	knock_timer = 0.18

@@ -15,8 +15,8 @@
 
 ```gdscript
 @export var portraits: Dictionary = {
-    "Дима": "res://assets/portraits/dima.png",
-    "Охранник": "res://assets/portraits/guard.png",
+	"Дима": "res://assets/portraits/dima.png",
+	"Охранник": "res://assets/portraits/guard.png",
 }
 ```
 

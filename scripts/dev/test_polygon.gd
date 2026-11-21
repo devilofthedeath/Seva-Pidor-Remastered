@@ -29,6 +29,10 @@ var info_label: Label
 var hp_label: Label
 var current: int = 0
 var _saved_lose_scene: String = ""
+var hit_label: Label = null
+var _hurt_dirs: Array[Vector2] = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
+var _hurt_names: Array[String] = ["справа", "слева", "сверху", "снизу"]
+var _hurt_dir_index: int = 0
 
 
 func _ready() -> void:
@@ -73,8 +77,12 @@ func _build_ui() -> void:
 	vbox.add_child(hp_label)
 	_on_hp_changed(RunState.hp, RunState.max_hp)
 
+	hit_label = Label.new()
+	hit_label.text = "Урон: кнопка «Урон 15» меняет сторону"
+	vbox.add_child(hit_label)
+
 	var help := Label.new()
-	help.text = "A/D или стрелки — движение\nZ — выстрел  X — мили\nR — рестарт  F — тряска  G — хит-стоп\nP — частицы  H — HP  F4 — фуллскрин"
+	help.text = "A/D или стрелки — движение\nZ — выстрел  X — мили  S+AD — кувырок\nR — рестарт  F — тряска  G — хит-стоп\nP — частицы  H — HP  F4 — фуллскрин"
 	vbox.add_child(help)
 
 	var arena_buttons := HBoxContainer.new()
@@ -104,6 +112,14 @@ func _build_ui() -> void:
 	particles.text = "Частицы"
 	particles.pressed.connect(_test_particles)
 	action_buttons.add_child(particles)
+	var hop_button := Button.new()
+	hop_button.text = "Прыжок врагов"
+	hop_button.pressed.connect(_test_hop)
+	action_buttons.add_child(hop_button)
+	var hurt_key_button := Button.new()
+	hurt_key_button.text = "Урон (клавиша)"
+	hurt_key_button.pressed.connect(_damage_player)
+	action_buttons.add_child(hurt_key_button)
 
 
 func _on_hp_changed(cur: int, mx: int) -> void:
@@ -127,8 +143,24 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _damage_player() -> void:
-	if is_instance_valid(player) and player.has_method("take_damage"):
-		player.take_damage(15, player.global_position + Vector2(40, 0))
+	if not is_instance_valid(player) or not player.has_method("take_damage"):
+		return
+	# Раньше удар всегда приходил справа, поэтому игрока отбрасывало
+	# только влево. Теперь стороны чередуются — можно проверить нокбек.
+	var i := _hurt_dir_index % _hurt_dirs.size()
+	var from: Vector2 = player.global_position + _hurt_dirs[i] * 40.0
+	_hurt_dir_index += 1
+	if hit_label != null:
+		hit_label.text = "Удар %s → отброс %s" % [_hurt_names[i], _hurt_dirs[i]]
+	player.take_damage(15, from)
+
+
+func _test_hop() -> void:
+	if arena_root == null:
+		return
+	for node in arena_root.get_children():
+		if node.has_method("hop"):
+			node.call("hop")
 
 
 func _test_shake() -> void:

@@ -1,113 +1,210 @@
-[gd_scene format=3 uid="uid://cp4nm2den20df"]
+[gd_scene format=3 uid="uid://c5ucmklgobjb8"]
 
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198121812249235.tscn" id="1_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019814113369397.tscn" id="2_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="3_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198231647343136.tscn" id="4_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198231652550250.tscn" id="5_o"]
+[ext_resource type="Script" uid="uid://qhe5mwv3qj4c" path="res://scripts/entities/pushable.gd" id="6_4u4rr"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198231652589802.tscn" id="6_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198231657204252.tscn" id="7_o"]
+[ext_resource type="Texture2D" uid="uid://defanbp335nae" path="res://assets/sprites/20198231642287267_1f.png" id="7_pi8j1"]
+[ext_resource type="Script" uid="uid://bvgfat6ixlear" path="res://scripts/entities/anim_sprite.gd" id="8_mt44i"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824039166539.tscn" id="9_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_202057038167750.tscn" id="10_o"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2020718224939449.tscn" id="11_o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824017299767.tscn" id="10_jt038"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824031422109.tscn" id="11_60ukb"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824036368756.tscn" id="12_ngxst"]
+[ext_resource type="AudioStream" uid="uid://b0430dx08p14g" path="res://assets/audio/snd_20207211443554418.wav" id="15_55g25"]
 [ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
 [ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
 
-[node name="LEVEL_5" type="Node2D" unique_id=1035181041]
+[sub_resource type="RectangleShape2D" id="sh"]
+size = Vector2(80, 80)
 
-[node name="Sky" type="CanvasLayer" parent="." unique_id=1931409495]
+[node name="LEVEL_4" type="Node2D" unique_id=664113222]
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=71435266]
 layer = -2
 
-[node name="Parallax" type="Node2D" parent="Sky" unique_id=1262210867]
+[node name="Parallax" type="Node2D" parent="Sky" unique_id=740700665]
 script = ExtResource("bgscroll")
 
-[node name="Bg" type="ColorRect" parent="Sky/Parallax" unique_id=534032900]
-offset_right = 480.0
-offset_bottom = 320.0
+[node name="Bg" type="ColorRect" parent="Sky/Parallax" unique_id=1617943376]
+offset_left = -280.0
+offset_top = -16.0
+offset_right = 608.0
+offset_bottom = 376.0
+scale = Vector2(4.3844175, 1.154146)
 color = Color(0.231, 0.188, 0.235, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="LevelBounds" type="Node" parent="." unique_id=1646669682]
+[node name="LevelBounds" type="Node" parent="." unique_id=532597346]
 script = ExtResource("bounds")
 
-[node name="W_0" parent="." unique_id=1445658366 instance=ExtResource("4_o")]
-position = Vector2(0, 240)
+[node name="W_0" parent="." unique_id=1603504046 instance=ExtResource("4_o")]
+position = Vector2(0, 304)
 
-[node name="W_1" parent="." unique_id=1403444307 instance=ExtResource("4_o")]
-position = Vector2(80, 240)
+[node name="W_9" parent="." unique_id=152308033 instance=ExtResource("4_o")]
+position = Vector2(-80, 304)
 
-[node name="W_2" parent="." unique_id=494801176 instance=ExtResource("4_o")]
-position = Vector2(160, 240)
+[node name="W_15" parent="." unique_id=115320543 instance=ExtResource("4_o")]
+position = Vector2(-160, 304)
 
-[node name="W_3" parent="." unique_id=799949951 instance=ExtResource("4_o")]
-position = Vector2(240, 240)
+[node name="W_1" parent="." unique_id=760906446 instance=ExtResource("4_o")]
+position = Vector2(80, 304)
 
-[node name="W_4" parent="." unique_id=2144905293 instance=ExtResource("4_o")]
-position = Vector2(320, 240)
+[node name="W_2" parent="." unique_id=640695942 instance=ExtResource("4_o")]
+position = Vector2(160, 304)
 
-[node name="W_5" parent="." unique_id=35300122 instance=ExtResource("4_o")]
-position = Vector2(400, 240)
+[node name="W_3" parent="." unique_id=138988504 instance=ExtResource("4_o")]
+position = Vector2(240, 304)
 
-[node name="W_6" parent="." unique_id=162952497 instance=ExtResource("5_o")]
-position = Vector2(200, 165)
+[node name="W_4" parent="." unique_id=835199841 instance=ExtResource("4_o")]
+position = Vector2(320, 304)
 
-[node name="W_7" parent="." unique_id=1383679094 instance=ExtResource("6_o")]
-position = Vector2(300, 175)
+[node name="W_5" parent="." unique_id=1464808632 instance=ExtResource("4_o")]
+position = Vector2(400, 304)
 
-[node name="W_8" parent="." unique_id=560296693 instance=ExtResource("6_o")]
-position = Vector2(10, 165)
+[node name="W_6" parent="." unique_id=45127223 instance=ExtResource("5_o")]
+position = Vector2(238, 224)
 
-[node name="W_9" parent="." unique_id=613335337 instance=ExtResource("7_o")]
-position = Vector2(350, 175)
+[node name="W_7" parent="." unique_id=2049107319 instance=ExtResource("6_o")]
+position = Vector2(338, 234)
 
-[node name="W_10" parent="." unique_id=1878792318 instance=ExtResource("4_o")]
-position = Vector2(-80, 160)
+[node name="W_8" parent="." unique_id=1405856095 instance=ExtResource("6_o")]
+position = Vector2(48, 224)
 
-[node name="W_11" parent="." unique_id=1166444256 instance=ExtResource("6_o")]
-position = Vector2(150, 170)
+[node name="table_r" type="CharacterBody2D" parent="." unique_id=1449939415 groups=["pushables"]]
+z_index = 2
+position = Vector2(388, 234)
+script = ExtResource("6_4u4rr")
+gc_id = "20198231657204252"
 
-[node name="W_12" parent="." unique_id=1818265113 instance=ExtResource("9_o")]
+[node name="Sprite2D" type="Sprite2D" parent="table_r" unique_id=898955618]
+modulate = Color(0.961, 0.969, 0.98, 1)
+texture = ExtResource("7_pi8j1")
+centered = false
+script = ExtResource("8_mt44i")
 
-[node name="W_13" parent="." unique_id=2008462826 instance=ExtResource("9_o")]
-position = Vector2(80, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="table_r" unique_id=1302789517]
+position = Vector2(40, 58)
+scale = Vector2(1, 0.39999998)
+shape = SubResource("sh")
 
-[node name="W_14" parent="." unique_id=1583653597 instance=ExtResource("9_o")]
-position = Vector2(160, 0)
+[node name="W_10" parent="." unique_id=995089556 instance=ExtResource("4_o")]
+position = Vector2(-208, 192)
 
-[node name="W_15" parent="." unique_id=1884831230 instance=ExtResource("9_o")]
-position = Vector2(240, 0)
+[node name="W_24" parent="." unique_id=341069707 instance=ExtResource("4_o")]
+position = Vector2(480, 304)
 
-[node name="W_16" parent="." unique_id=112651916 instance=ExtResource("9_o")]
-position = Vector2(320, 0)
+[node name="W_33" parent="." unique_id=353239931 instance=ExtResource("4_o")]
+position = Vector2(560, 304)
 
-[node name="W_17" parent="." unique_id=617193213 instance=ExtResource("9_o")]
-position = Vector2(400, 0)
+[node name="W_34" parent="." unique_id=2055523733 instance=ExtResource("4_o")]
+position = Vector2(640, 304)
 
-[node name="W_18" parent="." unique_id=2113519538 instance=ExtResource("1_o")]
-position = Vector2(140, 175)
+[node name="W_35" parent="." unique_id=1560553980 instance=ExtResource("4_o")]
+position = Vector2(720, 304)
+
+[node name="W_25" parent="." unique_id=1574160712 instance=ExtResource("4_o")]
+position = Vector2(664, 168)
+
+[node name="W_26" parent="." unique_id=332448863 instance=ExtResource("4_o")]
+position = Vector2(-208, 112)
+
+[node name="W_11" parent="." unique_id=600416147 instance=ExtResource("6_o")]
+position = Vector2(188, 229)
+
+[node name="W_12" parent="." unique_id=796432465 instance=ExtResource("1_o")]
+position = Vector2(168, 234)
 tex_hit = null
 tex_dead = null
 frames_dead = 1
 
-[node name="W_19" parent="." unique_id=278023072 instance=ExtResource("10_o")]
-position = Vector2(90, 130)
+[node name="W_14" parent="." unique_id=1072959141 instance=ExtResource("10_jt038")]
+position = Vector2(192, 224)
+popup_index = 100
 
-[node name="W_20" parent="." unique_id=1756077562 instance=ExtResource("5_o")]
-position = Vector2(60, 175)
+[node name="table_l" type="CharacterBody2D" parent="." unique_id=556184887 groups=["pushables"]]
+z_index = 2
+position = Vector2(103, 234)
+script = ExtResource("6_4u4rr")
+gc_id = "20198231657204252"
 
-[node name="W_24" parent="." unique_id=1354976249 instance=ExtResource("11_o")]
-position = Vector2(45, 175)
+[node name="Sprite2D" type="Sprite2D" parent="table_l" unique_id=648175231]
+modulate = Color(0.961, 0.969, 0.98, 1)
+texture = ExtResource("7_pi8j1")
+centered = false
+script = ExtResource("8_mt44i")
 
-[node name="W_25" parent="." unique_id=619327929 instance=ExtResource("2_o")]
-position = Vector2(2.0000007, 88)
-scale = Vector2(-1.1733, 3.7126)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="table_l" unique_id=2001569427]
+position = Vector2(39, 57)
+scale = Vector2(1, 0.36)
+shape = SubResource("sh")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=95857116]
+[node name="W_16" parent="." unique_id=1154005987 instance=ExtResource("11_60ukb")]
+position = Vector2(60, 70)
+
+[node name="W_17" parent="." unique_id=387975774 instance=ExtResource("12_ngxst")]
+position = Vector2(112, 232)
+speed = 0.0
+contact_damage_enabled = false
+move_dir_mode = 1
+melee_enabled = false
+
+[node name="W_18" parent="." unique_id=54302930 instance=ExtResource("9_o")]
+position = Vector2(0, -16)
+
+[node name="W_36" parent="." unique_id=958778855 instance=ExtResource("9_o")]
+position = Vector2(-80, -16)
+
+[node name="W_37" parent="." unique_id=549710167 instance=ExtResource("9_o")]
+position = Vector2(-160, -16)
+
+[node name="W_19" parent="." unique_id=1420557915 instance=ExtResource("9_o")]
+position = Vector2(80, -16)
+
+[node name="W_20" parent="." unique_id=2096283894 instance=ExtResource("9_o")]
+position = Vector2(160, -16)
+
+[node name="W_21" parent="." unique_id=672313453 instance=ExtResource("9_o")]
+position = Vector2(240, -16)
+
+[node name="W_22" parent="." unique_id=1126032026 instance=ExtResource("9_o")]
+position = Vector2(320, -16)
+
+[node name="W_23" parent="." unique_id=1531083664 instance=ExtResource("9_o")]
+position = Vector2(400, -16)
+
+[node name="W_27" parent="." unique_id=1628832528 instance=ExtResource("9_o")]
+position = Vector2(480, -16)
+
+[node name="W_28" parent="." unique_id=1912476481 instance=ExtResource("9_o")]
+position = Vector2(560, -16)
+
+[node name="W_29" parent="." unique_id=1037932940 instance=ExtResource("9_o")]
+position = Vector2(640, -16)
+
+[node name="W_30" parent="." unique_id=27320865 instance=ExtResource("9_o")]
+position = Vector2(720, -16)
+
+[node name="W_31" parent="." unique_id=826899842 instance=ExtResource("9_o")]
+position = Vector2(800, -16)
+
+[node name="W_32" parent="." unique_id=1808193752 instance=ExtResource("9_o")]
+position = Vector2(880, -16)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1336020326]
 layer = 10
 
-[node name="Hud_0" parent="HUD" unique_id=1143549822 instance=ExtResource("3_o")]
+[node name="Hud_0" parent="HUD" unique_id=712076304 instance=ExtResource("3_o")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 60.0
 offset_top = 25.0
 offset_right = 60.0
 offset_bottom = 25.0
+metadata/_edit_use_anchors_ = true
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1882575127]
+process_mode = 4
+stream = ExtResource("15_55g25")
+autoplay = true

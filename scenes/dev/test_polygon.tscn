@@ -4,3 +4,29 @@
 
 [node name="TestPolygon" type="Node2D" unique_id=654890111]
 script = ExtResource("1_polygon")
+
+[node name="DevOverlay" type="CanvasLayer" parent="." unique_id=802115685]
+layer = 2
+
+[node name="TitleBg" type="ColorRect" parent="DevOverlay" unique_id=1814937539]
+offset_left = 306.0
+offset_top = 6.0
+offset_right = 474.0
+offset_bottom = 30.0
+color = Color(0.05, 0.06, 0.1, 0.75)
+
+[node name="Title" type="Label" parent="DevOverlay" unique_id=1652481760]
+offset_left = 306.0
+offset_top = 6.0
+offset_right = 474.0
+offset_bottom = 30.0
+text = "ТЕСТОВЫЙ ПОЛИГОН"
+horizontal_alignment = 1
+
+[node name="Footer" type="Label" parent="DevOverlay" unique_id=1276974846]
+offset_left = 88.0
+offset_top = 24.0
+offset_right = 556.0
+offset_bottom = 44.0
+text = "1–4 — арены   R — рестарт   P — частицы   Esc — пауза"
+horizontal_alignment = 1
