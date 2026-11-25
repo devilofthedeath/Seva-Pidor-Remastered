@@ -37,6 +37,7 @@ func _on_body(body):
 	if team == "player" and body.is_in_group("enemies") and body.has_method("take_damage"):
 		# Игрок стреляет какашками — пуля лопается коричневым.
 		GameEvents.request_burst("poop", global_position, BURST_POOP, velocity.normalized())
+		_poop_impact(body)
 		body.take_damage(damage, global_position)
 		queue_free()
 		return
@@ -49,17 +50,25 @@ func _on_body(body):
 		return
 	if team == "player" and body.is_in_group("destroyables") and body.has_method("take_damage"):
 		GameEvents.request_burst("poop", global_position, BURST_POOP, velocity.normalized())
+		_poop_impact(body)
 		body.take_damage(damage, global_position)
 		queue_free()
 		return
-	if body.is_in_group("blocks") or body.is_in_group("pushables"):
+	if body.is_in_group("blocks") or body.is_in_group("pushables") or body.is_in_group("moving_blocks"):
 		# Неподвижная пуля — это мина, она должна лежать на полу и
 		# подрывать врагов, а не ломаться о блоки.
 		if velocity.length() > 0.0:
 			var wall_preset := "poop" if team == "player" else "dust"
 			var wall_color := BURST_POOP if team == "player" else BURST_DUST
 			GameEvents.request_burst(wall_preset, global_position, wall_color, velocity.normalized())
+			if team == "player":
+				_poop_impact(body)
 			queue_free()
+
+
+## Лужа появляется только от пули, не от мили/контакта.
+func _poop_impact(body: Node2D) -> void:
+	FX.shit_lake(global_position, body, maxi(0, int(body.z_index) - 1))
 
 
 func _on_area(area):

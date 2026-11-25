@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://c5ucmklgobjb8"]
 
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198121812249235.tscn" id="1_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019821195231832.tscn" id="3_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198231647343136.tscn" id="4_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_20198231652550250.tscn" id="5_o"]
@@ -10,24 +9,21 @@
 [ext_resource type="Script" uid="uid://bvgfat6ixlear" path="res://scripts/entities/anim_sprite.gd" id="8_mt44i"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824039166539.tscn" id="9_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824017299767.tscn" id="10_jt038"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824031422109.tscn" id="11_60ukb"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824036368756.tscn" id="12_ngxst"]
+[ext_resource type="PackedScene" uid="uid://msybcvb1qh2n" path="res://scenes/prefabs/gun_player.tscn" id="14_6xxvj"]
 [ext_resource type="AudioStream" uid="uid://b0430dx08p14g" path="res://assets/audio/snd_20207211443554418.wav" id="15_55g25"]
+[ext_resource type="Texture2D" uid="uid://c80a0yqcmnucm" path="res://assets/sprites/seva-down.png" id="15_pi8j1"]
+[ext_resource type="Texture2D" uid="uid://cec14m7n5e8k6" path="res://assets/sprites/seva-rolling.png" id="16_mt44i"]
 [ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
 [ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
 
 [sub_resource type="RectangleShape2D" id="sh"]
-size = Vector2(80, 80)
+size = Vector2(80, 96.388885)
 
 [node name="LEVEL_4" type="Node2D" unique_id=664113222]
 
-[node name="Sky" type="CanvasLayer" parent="." unique_id=71435266]
-layer = -2
-
-[node name="Parallax" type="Node2D" parent="Sky" unique_id=740700665]
-script = ExtResource("bgscroll")
-
-[node name="Bg" type="ColorRect" parent="Sky/Parallax" unique_id=1617943376]
+[node name="Bg" type="ColorRect" parent="." unique_id=1617943376]
+z_index = -300
 offset_left = -280.0
 offset_top = -16.0
 offset_right = 608.0
@@ -36,8 +32,16 @@ scale = Vector2(4.3844175, 1.154146)
 color = Color(0.231, 0.188, 0.235, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Sky" type="CanvasLayer" parent="." unique_id=71435266]
+layer = -2
+
+[node name="Parallax" type="Node2D" parent="Sky" unique_id=740700665]
+script = ExtResource("bgscroll")
+
 [node name="LevelBounds" type="Node" parent="." unique_id=532597346]
 script = ExtResource("bounds")
+level_width = 1440
+level_height = 480
 
 [node name="W_0" parent="." unique_id=1603504046 instance=ExtResource("4_o")]
 position = Vector2(0, 304)
@@ -85,7 +89,7 @@ centered = false
 script = ExtResource("8_mt44i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="table_r" unique_id=1302789517]
-position = Vector2(40, 58)
+position = Vector2(40, 59.27777)
 scale = Vector2(1, 0.39999998)
 shape = SubResource("sh")
 
@@ -105,7 +109,16 @@ position = Vector2(640, 304)
 position = Vector2(720, 304)
 
 [node name="W_25" parent="." unique_id=1574160712 instance=ExtResource("4_o")]
-position = Vector2(664, 168)
+position = Vector2(800, 304)
+
+[node name="W_38" parent="." unique_id=522711334 instance=ExtResource("4_o")]
+position = Vector2(880, 304)
+
+[node name="W_39" parent="." unique_id=596091532 instance=ExtResource("4_o")]
+position = Vector2(960, 304)
+
+[node name="W_40" parent="." unique_id=723113413 instance=ExtResource("4_o")]
+position = Vector2(1040, 304)
 
 [node name="W_26" parent="." unique_id=332448863 instance=ExtResource("4_o")]
 position = Vector2(-208, 112)
@@ -113,15 +126,19 @@ position = Vector2(-208, 112)
 [node name="W_11" parent="." unique_id=600416147 instance=ExtResource("6_o")]
 position = Vector2(188, 229)
 
-[node name="W_12" parent="." unique_id=796432465 instance=ExtResource("1_o")]
-position = Vector2(168, 234)
-tex_hit = null
-tex_dead = null
-frames_dead = 1
-
 [node name="W_14" parent="." unique_id=1072959141 instance=ExtResource("10_jt038")]
-position = Vector2(192, 224)
+position = Vector2(184, 232)
+damage = 0
 popup_index = 100
+
+[node name="W_17" parent="." unique_id=387975774 instance=ExtResource("12_ngxst")]
+position = Vector2(48, 232)
+collision_layer = 1
+speed = 0.0
+contact_damage_enabled = false
+use_gravity = true
+move_dir_mode = 1
+melee_enabled = false
 
 [node name="table_l" type="CharacterBody2D" parent="." unique_id=556184887 groups=["pushables"]]
 z_index = 2
@@ -136,19 +153,9 @@ centered = false
 script = ExtResource("8_mt44i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="table_l" unique_id=2001569427]
-position = Vector2(39, 57)
+position = Vector2(41, 59.5)
 scale = Vector2(1, 0.36)
 shape = SubResource("sh")
-
-[node name="W_16" parent="." unique_id=1154005987 instance=ExtResource("11_60ukb")]
-position = Vector2(60, 70)
-
-[node name="W_17" parent="." unique_id=387975774 instance=ExtResource("12_ngxst")]
-position = Vector2(112, 232)
-speed = 0.0
-contact_damage_enabled = false
-move_dir_mode = 1
-melee_enabled = false
 
 [node name="W_18" parent="." unique_id=54302930 instance=ExtResource("9_o")]
 position = Vector2(0, -16)
@@ -192,6 +199,96 @@ position = Vector2(800, -16)
 [node name="W_32" parent="." unique_id=1808193752 instance=ExtResource("9_o")]
 position = Vector2(880, -16)
 
+[node name="W_41" parent="." unique_id=1348463376 instance=ExtResource("9_o")]
+position = Vector2(960, -16)
+
+[node name="W_42" parent="." unique_id=266784930 instance=ExtResource("9_o")]
+position = Vector2(1040, -16)
+
+[node name="W_43" parent="." unique_id=1971294535 instance=ExtResource("4_o")]
+position = Vector2(1120, 304)
+
+[node name="W_44" parent="." unique_id=1394410998 instance=ExtResource("4_o")]
+position = Vector2(1200, 304)
+
+[node name="W_45" parent="." unique_id=915347852 instance=ExtResource("4_o")]
+position = Vector2(1280, 304)
+
+[node name="W_46" parent="." unique_id=1324273113 instance=ExtResource("4_o")]
+position = Vector2(1360, 304)
+
+[node name="W_47" parent="." unique_id=1288226886 instance=ExtResource("4_o")]
+position = Vector2(1440, 304)
+
+[node name="W_48" parent="." unique_id=65856568 instance=ExtResource("4_o")]
+position = Vector2(1520, 304)
+
+[node name="W_49" parent="." unique_id=549870892 instance=ExtResource("4_o")]
+position = Vector2(1600, 304)
+
+[node name="W_50" parent="." unique_id=1647333398 instance=ExtResource("9_o")]
+position = Vector2(1120, -16)
+
+[node name="W_51" parent="." unique_id=2124098578 instance=ExtResource("9_o")]
+position = Vector2(1200, -16)
+
+[node name="W_52" parent="." unique_id=1969029145 instance=ExtResource("9_o")]
+position = Vector2(1280, -16)
+
+[node name="W_53" parent="." unique_id=1643062808 instance=ExtResource("9_o")]
+position = Vector2(1360, -16)
+
+[node name="W_54" parent="." unique_id=2147448274 instance=ExtResource("9_o")]
+position = Vector2(1440, -16)
+
+[node name="W_55" parent="." unique_id=1601334893 instance=ExtResource("9_o")]
+position = Vector2(1520, -16)
+
+[node name="W_56" parent="." unique_id=1318015434 instance=ExtResource("9_o")]
+position = Vector2(1600, -16)
+
+[node name="W_57" parent="." unique_id=1642910585 instance=ExtResource("4_o")]
+position = Vector2(1680, 304)
+
+[node name="W_58" parent="." unique_id=1673539671 instance=ExtResource("4_o")]
+position = Vector2(1760, 304)
+
+[node name="W_59" parent="." unique_id=1568239777 instance=ExtResource("4_o")]
+position = Vector2(1840, 304)
+
+[node name="W_60" parent="." unique_id=1746953055 instance=ExtResource("4_o")]
+position = Vector2(1920, 304)
+
+[node name="W_61" parent="." unique_id=1223847693 instance=ExtResource("4_o")]
+position = Vector2(2000, 304)
+
+[node name="W_62" parent="." unique_id=1780751578 instance=ExtResource("4_o")]
+position = Vector2(2080, 304)
+
+[node name="W_63" parent="." unique_id=2082353981 instance=ExtResource("4_o")]
+position = Vector2(2160, 304)
+
+[node name="W_64" parent="." unique_id=1801303077 instance=ExtResource("9_o")]
+position = Vector2(1680, -16)
+
+[node name="W_65" parent="." unique_id=501709128 instance=ExtResource("9_o")]
+position = Vector2(1760, -16)
+
+[node name="W_66" parent="." unique_id=65600264 instance=ExtResource("9_o")]
+position = Vector2(1840, -16)
+
+[node name="W_67" parent="." unique_id=605579553 instance=ExtResource("9_o")]
+position = Vector2(1920, -16)
+
+[node name="W_68" parent="." unique_id=432221478 instance=ExtResource("9_o")]
+position = Vector2(2000, -16)
+
+[node name="W_69" parent="." unique_id=1009521707 instance=ExtResource("9_o")]
+position = Vector2(2080, -16)
+
+[node name="W_70" parent="." unique_id=1880512366 instance=ExtResource("9_o")]
+position = Vector2(2160, -16)
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1336020326]
 layer = 10
 
@@ -208,3 +305,8 @@ metadata/_edit_use_anchors_ = true
 process_mode = 4
 stream = ExtResource("15_55g25")
 autoplay = true
+
+[node name="gun_player" parent="." unique_id=352840615 instance=ExtResource("14_6xxvj")]
+position = Vector2(168, 232)
+tex_crouch = ExtResource("15_pi8j1")
+tex_roll = ExtResource("16_mt44i")

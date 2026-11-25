@@ -15,6 +15,7 @@ extends Area2D
 @export var action_score: int = 0
 @export var action_health: int = 0
 @export var damage: int = 25
+## ID диалога → файл res://dialogue/popup_<ID>.dialogue. 0 — не показывать.
 @export var popup_index: int = 0
 @export var grant_gun: bool = false
 @export var timer_id: int = 0

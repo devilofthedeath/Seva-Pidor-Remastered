@@ -174,7 +174,7 @@ position = Vector2(1280, 240)
 position = Vector2(1360, 240)
 
 [node name="W_33" parent="." unique_id=1224005600 instance=ExtResource("15_o")]
-position = Vector2(580, 165)
+position = Vector2(1208, 170)
 max_hp = 200
 hp = 200
 tex_hit = null
@@ -696,12 +696,8 @@ position = Vector2(4000, 215)
 
 [node name="Player" parent="." unique_id=206023886 instance=ExtResource("12_o")]
 position = Vector2(0, 168)
-tex_hit = null
-tex_dead = null
-frames_dead = 1
 tex_crouch = ExtResource("53_ih87n")
 tex_roll = ExtResource("54_8ck47")
-frames_roll = 3
 
 [node name="W_185" parent="." unique_id=1766278501 instance=ExtResource("59_o")]
 position = Vector2(5200, 145)

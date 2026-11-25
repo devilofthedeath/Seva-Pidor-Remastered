@@ -61,12 +61,6 @@ var last_death_scene: String:
 	set(value):
 		RunState.last_death_scene = value
 
-var popups: Dictionary:
-	get:
-		return DialogueService.popups
-	set(value):
-		DialogueService.popups = value
-
 var is_popup_open: bool:
 	get:
 		return DialogueService.is_popup_open
@@ -124,6 +118,13 @@ func is_cleared(obj_id: String) -> bool:
 # --- Диалоги ---
 func show_popup(idx: int) -> void:
 	DialogueService.show_popup(idx)
+
+## Диалог по ID — это файл res://dialogue/popup_<ID>.dialogue.
+func popup_exists(idx: int) -> bool:
+	return DialogueService.has_popup(idx)
+
+func popup_ids() -> Array[int]:
+	return DialogueService.available_ids()
 
 
 # --- Сцены ---

@@ -110,6 +110,9 @@ var _body_shape: RectangleShape2D = null
 var _body_col: CollisionShape2D = null
 
 var _last_hit_from = null
+## Направление от последнего удара к центру тела (уже с поправкой на
+## смещённый origin спрайта). Используется и для нокбека, и для смерти.
+var _last_hit_dir: Vector2 = Vector2.ZERO
 var _death_spin_dir: float = 1.0
 var _death_spin: float = 900.0
 var _death_launched: bool = false
@@ -357,6 +360,7 @@ func _shoot(in_air: bool):
 
 	shoot_timer = shoot_cooldown
 	is_attacking = true
+	speed = 0.0
 	if in_air and tex_shoot_air != null:
 		_set_anim(tex_shoot_air, frames_shoot_air)
 	elif tex_shoot != null:
@@ -393,6 +397,7 @@ func _shoot(in_air: bool):
 
 	var col = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
+	
 	shape.size = bullet_shape
 	col.shape = shape
 	b.add_child(col)
@@ -403,6 +408,7 @@ func _shoot(in_air: bool):
 	await get_tree().create_timer(0.2).timeout
 	if is_instance_valid(self):
 		is_attacking = false
+		speed = 300.0
 
 
 func _melee(in_air: bool):
@@ -442,34 +448,59 @@ func _shake_camera(preset: String, amount: int = 0) -> void:
 	GameEvents.request_shake(preset, maxf(0.7, float(amount) / 25.0))
 
 
+## У игрока origin — верхний ле угол спрайта, а тело смещено на body_center.
+## Если считать от global_position, удар строго сверху/снизу даёт d.x ≈ -39.5,
+## и игрока всегда отбрасывало влево. Считаем от центра коллизии.
+func _hit_center() -> Vector2:
+	for child in get_children():
+		if child is CollisionShape2D:
+			return (child as CollisionShape2D).global_position
+	return global_position + body_center
+
+
+func _direction_from_hit(from_pos) -> Vector2:
+	if not (from_pos is Vector2):
+		return Vector2.ZERO
+	var d: Vector2 = _hit_center() - (from_pos as Vector2)
+	if d.length() < 0.01:
+		return Vector2.ZERO
+	return d.normalized()
+
+
 func take_damage(amount: int, _from_pos = null):
 	if is_dead or invuln_timer > 0.0:
 		return
 	if is_rolling and roll_invulnerable and roll_invuln_timer > 0.0:
 		return
 	_last_hit_from = _from_pos
+	_last_hit_dir = _direction_from_hit(_from_pos)
 	invuln_timer = hurt_invuln_time
 	_shake_camera("hit", amount)
 	GameEvents.request_hit_stop("hit" if amount >= 15 else "light")
 	# Слабое короткое отталкивание от источника урона.
-	var away := Vector2(-float(facing), 0.0)
-	if _from_pos is Vector2:
-		var d: Vector2 = global_position - (_from_pos as Vector2)
-		if d.length() > 0.01:
-			away = d.normalized()
+	var away := _last_hit_dir
+	if away.length_squared() < 0.01:
+		away = Vector2(-float(facing), 0.0)
 	if use_blood_particles:
 		GameEvents.request_burst("blood", global_position, Color(0.78, 0.10, 0.12, 1.0), away)
 	if mode == "platformer":
 		# По Y не отбрасываем: иначе при попадании снизу/сбоку можно улететь в космос.
-		away.y = 0.0
-		if away.length() < 0.01:
-			# Удар строго сверху/снизу: сначала отбрасываем назад от движения,
-			# и только если игрок стоит — от взгляда. Иначе получалось
-			# «всегда в одну сторону» при любом вертикальном попадании.
+		if absf(away.x) < 0.08:
+			# Удар строго сверху/снизу (например, шипы под ногами): берём
+			# направление назад от движения, затем от уже посчитанного
+			# нокбека, и только в конце от взгляда.
 			var moving := signf(velocity.x)
-			away = Vector2(-moving if absf(moving) > 0.01 else -float(facing), 0.0)
+			if absf(moving) > 0.01:
+				away = Vector2(-moving, 0.0)
+			elif absf(knockback.x) > 1.0:
+				away = Vector2(signf(knockback.x), 0.0)
+			else:
+				away = Vector2(-float(facing), 0.0)
+		away.y = 0.0
 		away = away.normalized()
 	knockback = away * 260.0
+	# Смерть должна лететь туда же, куда только что толкнуло нокбеком.
+	_last_hit_dir = away
 	knock_timer = 0.18
 	GameState.hp = max(0, GameState.hp - amount)
 	if GameState.hp <= 0:
@@ -504,12 +535,17 @@ func _start_death_launch(amount: int = 0) -> void:
 	# Чем больше урон, тем сильнее отлёт, но с жёстким потолком.
 	var damage_scale := clampf(0.75 + float(amount) / maxf(1.0, float(max_hp)) * 1.5,
 		death_launch_min_scale, death_launch_max_scale)
-	# Направление отлёта — от источника последнего урона, иначе назад от взгляда.
-	var away := Vector2(-float(facing), 0.0)
-	if _last_hit_from is Vector2:
-		var d: Vector2 = global_position - (_last_hit_from as Vector2)
-		if d.length() > 0.01:
-			away = d.normalized()
+	# Направление отлёта — то же, что у нокбека от этого удара (уже считалось
+	# от центра тела, а не от смещённого origin спрайта).
+	var away := _last_hit_dir
+	if away.length_squared() < 0.01:
+		away = Vector2(-float(facing), 0.0)
+	# Удар строго сверху/снизу (шипы, падение на врага) не имеет бока.
+	# Раньше он всегда превращался в -facing, поэтому уносило только влево.
+	# Если игрок стоит на месте — выбираем случайный бок: смешно и честно.
+	var raw_dir := _direction_from_hit(_last_hit_from)
+	if absf(raw_dir.x) < 0.08 and absf(velocity.x) < 1.0:
+		away = Vector2.RIGHT if randf() < 0.5 else Vector2.LEFT
 	if mode == "platformer":
 		# В платформере — сильный горизонтальный отлёт + подброс вверх.
 		var dir_x := signf(away.x)

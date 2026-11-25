@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824031422109.tscn" id="9_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824036368756.tscn" id="10_o"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Obj_2019824039166539.tscn" id="11_o"]
-[ext_resource type="AudioStream" uid="uid://b0430dx08p14g" path="res://assets/audio/snd_20207211443554418.wav" id="12_bgm"]
 [ext_resource type="Script" uid="uid://cpl7vwp6r6oka" path="res://scripts/entities/bg_scroll.gd" id="bgscroll"]
 [ext_resource type="Script" uid="uid://k8an4hgjdout" path="res://scripts/entities/level_bounds.gd" id="bounds"]
 
@@ -39,6 +38,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LevelBounds" type="Node" parent="." unique_id=532597346]
 script = ExtResource("bounds")
+level_width = 720
+level_height = 480
 
 [node name="W_0" parent="." unique_id=1603504046 instance=ExtResource("3_o")]
 position = Vector2(0, 304)
@@ -106,7 +107,10 @@ position = Vector2(640, 304)
 position = Vector2(720, 304)
 
 [node name="W_25" parent="." unique_id=1574160712 instance=ExtResource("3_o")]
-position = Vector2(664, 168)
+position = Vector2(728, 176)
+
+[node name="W_38" parent="." unique_id=939420050 instance=ExtResource("3_o")]
+position = Vector2(728, 72)
 
 [node name="W_26" parent="." unique_id=332448863 instance=ExtResource("3_o")]
 position = Vector2(-208, 112)
@@ -152,7 +156,7 @@ shape = SubResource("sh")
 position = Vector2(60, 70)
 
 [node name="W_17" parent="." unique_id=387975774 instance=ExtResource("10_o")]
-position = Vector2(-64, 232)
+position = Vector2(32, 240)
 move_dir_mode = 1
 
 [node name="W_18" parent="." unique_id=54302930 instance=ExtResource("11_o")]
@@ -211,5 +215,4 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1882575127]
 process_mode = 4
-stream = ExtResource("12_bgm")
 autoplay = true
